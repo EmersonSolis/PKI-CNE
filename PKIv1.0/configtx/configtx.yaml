@@ -1,0 +1,173 @@
+#   CAPABILITIES
+Capabilities:
+  Application: &ApplicationCapabilities
+    V2_0: true
+  Orderer: &OrdererCapabilities
+    V2_0: true
+  Channel: &ChannelCapabilities
+    V2_0: true
+
+# 1. Organizations
+Organizatios:
+
+  - &Orderer
+    Name: OrdererCNE
+    ID: OrdererCneMSP
+    # Aquí va la dirección msp del criptomarial del orderer ./crypto-config/orderer
+    MSPDir: ./crypto-config/ordererOrganizations/cne.gob.ec/msp
+    Policies: &OrdererPolicies
+      Readers:
+          Type: Signature
+          Rule: "OR('OrdererCneMSP.admin')"
+      Writers:
+          Type: Signature
+          Rule: "OR('OrdererCneMSP.admin')"
+      Admins:
+          Type: Signature
+          Rule: "OR('OrdererCneMSP.admin')"
+      Endorsement:
+          Type: Signature
+          Rule: "OR('OrdererCneMSP.peer')"
+
+  - &Org1
+    Name: CNE
+    ID: CneMSP
+    # Aquí va la dirección msp del criptomarial del peer
+    MSPDir: ./crypto-config/peerOrganizations/cne.gob.ec/msp
+    olicies: &Org1Policies
+      Readers:
+          Type: Signature
+        #   Rule: "OR('AcmeMSP.admin', 'AcmeMSP.peer', 'AcmeMSP.client')"
+          Rule: "OR('CneMSP.admin')"
+      Writers:
+          Type: Signature
+        #   Rule: "OR('AcmeMSP.admin', 'AcmeMSP.client')"
+          Rule: "OR('CneMSP.admin')"
+      Admins:
+          Type: Signature
+          Rule: "OR('CneMSP.admin')"
+      Endorsement:
+          Type: Signature
+          Rule: "OR('CneMSP.peer')"
+    AnchorPeers:
+      - Host: localhost
+        Port: 7051
+
+# 2. Orderer
+Orderer: &OrdererDefaults
+
+  OrdereType: solo # Tambien puede ser solo | kafka | etcdraft
+
+  Addresses:
+    - localhost:7050 # En este caso que estamos usando solo, con una dirección basta, en caso de ser kafka o raft se necesitan multiples direcciones.
+
+  # Policies for Orderer
+  Policies:
+    Readers:
+        Type: ImplicitMeta
+        Rule: "ANY Readers"
+    Writers:
+        Type: ImplicitMeta
+        Rule: "ANY Writers"
+    Admins:
+        Type: ImplicitMeta  
+        # UPDATED December 15, 2019
+        Rule: "ANY Admins"
+        # Rule: "MAJORITY Admins"
+
+    # BlockValidation specifies what signatures must be included in the block
+    # from the orderer for the peer to validate it.
+    BlockValidation:
+        Type: ImplicitMeta
+        Rule: "ANY Writers"
+
+
+  # Batch Timeout: Block time de la red, tiempo de espera antes de crear un batch
+  # Cuanto tiempo después de la primera transacción antes de que el bloque sea creado
+  BatchTimeout: 2s
+
+  # Batch size: Controla el numero de mensajes dentro de un bloque
+  BatchSize:
+    MasMessageCount: 10 # Número máximo de transacciones por bloque
+    AbsoluteMaxBytes: 10 MB # Tamaño máximo que una transacción puede tener, en caso de sobrepasar los 512 KB, este verificará que se encuentra dentro de 512 KB - 10 MB, si está,
+                            # se sella el bloque y se envia a los demás peers
+    PreferredMaxBytes: 512 KB # Tamaño máximo preferido del bloque, en caso de llenar dicho tamaño, una vez lleno, el bloque se sellla y se envía a los otros peers
+
+
+# 3. Application
+Application: &ApplicationDefaults
+
+  Policies: &ApplicationDefaultPolicies
+
+    # approveformyorg
+    LifecycleEndorsement:
+        Type: ImplicitMeta
+        # Rule: "MAJORITY Endorsement"
+        Rule: "ANY Endorsement"
+    
+    # --channel-config-policy
+    Endorsement:
+        Type: ImplicitMeta
+        Rule: "MAJORITY Endorsement"
+    Readers:
+        Type: ImplicitMeta
+        Rule: "ANY Readers"
+    Writers:
+        Type: ImplicitMeta
+        Rule: "ANY Writers"
+    Admins:
+        Type: ImplicitMeta
+        Rule: "MAJORITY Admins"
+
+  Capabilities:
+    <<: *ApplicationCapabilities
+
+  Organizations: # Colocamos los participantes en las transacciones
+    - *Org1
+
+
+# 4. Channel
+Channel: &ChannelDefaults
+  Policies:
+    Readers:
+        Type: ImplicitMeta
+        Rule: "ANY Readers"
+    Writers:
+        Type: ImplicitMeta
+        Rule: "ANY Writers"
+    Admins:
+        Type: ImplicitMeta
+        Rule: "MAJORITY Admins"
+
+  Capabilities:
+    <<: *ChannelCapabilities
+
+# Profiles
+Profiles:
+  # Genesis - Este es para generar el Genesis block
+  # Para configurar con este perfil, usar:
+  # configtxgen -profile CneOrdererGenesis
+  CneOrdererGenesis:
+    Orderer: 
+      <<: *OrdererDefaults
+      Organizations:
+          - *Orderer
+      Consortiums:
+        CneConsortium:
+            Organizations:
+                - *Org1
+
+  # Channel - Este sera el canal de aplicación usado por el CNE
+  # Para configurar con este perfil, usar:
+  # configtxgen -profile CneChannel
+  CneChannel:
+    Consortium: CNEConsortium
+    <<: *ChannelDefaults
+    Application:
+        <<: *ApplicationDefaults
+        Organizations:
+            - *Org1
+        Capabilities:
+            <<: *ApplicationCapabilities
+
+
