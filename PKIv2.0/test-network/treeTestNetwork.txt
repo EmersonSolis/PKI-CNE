@@ -1,0 +1,757 @@
+.
+├── CHAINCODE_AS_A_SERVICE_TUTORIAL.md
+├── compose
+│   ├── compose-ca.yaml
+│   ├── compose-couch.yaml
+│   ├── compose-test-net.yaml
+│   ├── docker
+│   │   ├── docker-compose-ca.yaml
+│   │   ├── docker-compose-couch.yaml
+│   │   ├── docker-compose-test-net.yaml
+│   │   └── peercfg
+│   │       ├── CNE
+│   │       │   └── core.yaml
+│   │       ├── core.yaml
+│   │       ├── MediosComunicacion
+│   │       ├── MOE
+│   │       ├── OrgPolitica1
+│   │       └── OrgPolitica2
+│   └── podman
+│       ├── peercfg
+│       │   └── core.yaml
+│       ├── podman-compose-ca.yaml
+│       ├── podman-compose-couch.yaml
+│       └── podman-compose-test-net.yaml
+├── configtx
+│   ├── channel-artifacts
+│   │   └── channel.tx
+│   ├── configtx.yaml
+│   └── system-genesis-block
+│       └── genesis.block
+├── monitordocker.sh
+├── network.sh
+├── organizations
+│   ├── ccp-generate.sh
+│   ├── ccp-template.json
+│   ├── ccp-template.yaml
+│   ├── cryptogen
+│   │   ├── crypto-config-orderer.yaml
+│   │   ├── crypto-config-org1.yaml
+│   │   ├── crypto-config-org2.yaml
+│   │   └── crypto-config.yaml
+│   ├── fabric-ca
+│   │   ├── cne
+│   │   │   ├── fabric-ca-server-config.yaml
+│   │   │   ├── IssuerPublicKey
+│   │   │   ├── IssuerRevocationPublicKey
+│   │   │   └── msp
+│   │   │       └── keystore
+│   │   │           ├── 3255d46eebe5bf4a2cf6b72c42bfc6d3417adb06d796526bc2e515c7c5ca5d40_sk
+│   │   │           ├── c3d103258ba4f7f78169dec8cc9e2e367536854ecfb68b79151d11588c1df22b_sk
+│   │   │           ├── e08f0445b67fba5532ca6e6b709b9c472384f0bd4d2ad6786ef82ce4b3e0c93d_sk
+│   │   │           ├── IssuerRevocationPrivateKey
+│   │   │           └── IssuerSecretKey
+│   │   ├── mediosdecomunicacion
+│   │   │   ├── fabric-ca-server-config.yaml
+│   │   │   ├── fabric-ca-server.db
+│   │   │   ├── IssuerPublicKey
+│   │   │   ├── IssuerRevocationPublicKey
+│   │   │   └── msp
+│   │   │       └── keystore
+│   │   │           ├── 160465ea02035c3b445a2d46d5b4f830fd376b1e05acca2d8e37f2b356f6ee94_sk
+│   │   │           ├── 2155f3931ee02b5706da2da83d31e711b6e0db45ce9e8908c233192b5b2e40ff_sk
+│   │   │           ├── 2bba1665b900a2787e711a0c1d14e09585b3201ffea9b88c848bd6ff481cd8d1_sk
+│   │   │           ├── 493216e516169751d399bbf74f8b0d61399eb381708f9c68ae8321be38b38884_sk
+│   │   │           ├── 59bc39bd6bb9a38eb95c4ba63805b946fa22d37a1592ca16f76ac1fb033cde14_sk
+│   │   │           ├── 6ea64edf54378310ae7610fbc28872db335d949ea6d07890f3f639df57880037_sk
+│   │   │           ├── 899e110cb0c55ad4803acb93c6caa3944570c26740f6446761000767735b2174_sk
+│   │   │           ├── 90fd6509dea3f1b83f70d839c20b3ff5a35cf96ba593eb4c7da6f59c5a999b11_sk
+│   │   │           ├── 923ff26a27e9fbb58efdba0cca8e84b58d0309e7f8359c738d6147e11ba35b4e_sk
+│   │   │           ├── a71db8f4c1e8de01db0adc0245b3e455ea4fa2e079261f5f995176869163f24e_sk
+│   │   │           ├── b38d94775c0416e7d1ed0edca3e35aa7948ced85593ec5a429fa7cffa8c2e4e2_sk
+│   │   │           ├── e7347bf743c8230b61b9532dfebcf914bc94fb2fb96800fc08387f1459d4ddbd_sk
+│   │   │           ├── eb00f15350ecee1ccc14b6075039fcaf921f0222243f9962b395631e7b34af09_sk
+│   │   │           ├── fa4a3e4ec9e3f6c7d1ad69a0b3a7730761f1638729e86c2e15836c343718e9b8_sk
+│   │   │           ├── IssuerRevocationPrivateKey
+│   │   │           └── IssuerSecretKey
+│   │   ├── moe
+│   │   │   ├── fabric-ca-server-config.yaml
+│   │   │   ├── fabric-ca-server.db
+│   │   │   ├── IssuerPublicKey
+│   │   │   ├── IssuerRevocationPublicKey
+│   │   │   └── msp
+│   │   │       └── keystore
+│   │   │           ├── 135f88a61d5608a17a15977204d46978c63395f0f9f362fd0dd361658f1bf8ac_sk
+│   │   │           ├── 31afd5fe4fb6c21d373286bdb865d9fde095f300b701330862f31af6d6744440_sk
+│   │   │           ├── 36988fcdea5532d8bf5268fb9ef4630512e9c74be4f869d9852c8b7617c09767_sk
+│   │   │           ├── 5ae879072d566c84d51a4230cad7b72319ec066bd06622e31bdb10b7b5fdb2a3_sk
+│   │   │           ├── 8acac5eda899dfb0ed7e0fe52a9de614b08b60ef98f6ca8d0d547c4d4819e602_sk
+│   │   │           ├── 8c7da422d0248e825240a8ddf732b9252cc14e33e85aa9a6944e20160e2b20b6_sk
+│   │   │           ├── a08abd9d9b226e56284ea3fe960dd34ffb45939bd2159ca10bc6b8777a4c63fb_sk
+│   │   │           ├── a68306c1683c8597d00ec11379d727121465a6f95cf74b42b836076e9ad5cd04_sk
+│   │   │           ├── a6b9854a0e0209b21a7e68545dd8f57710c85251a4b673014e71121f8cc2c6d4_sk
+│   │   │           ├── aeef080cd5824e3ad9163e4c61cc74861a7af95141bbf4757994408bd862e0a2_sk
+│   │   │           ├── bdc23b2b60db85e1ea4ec0bd078db7d0e0f5b166f0780b6cd5c1b3cdfd57ef18_sk
+│   │   │           ├── c0e436cfa138b798d4df3afafe53ed0db83157311eb01b21d963b1b72238da99_sk
+│   │   │           ├── efb7fd1b2b1854cf086ebe33207d62542e5db8a299ee464c3a7a275e133aaf80_sk
+│   │   │           ├── ff8be31170869f69020faad783ec786c8b6329a7febe9af51b75304605759e75_sk
+│   │   │           ├── IssuerRevocationPrivateKey
+│   │   │           └── IssuerSecretKey
+│   │   ├── ordererOrg
+│   │   │   └── fabric-ca-server-config.yaml
+│   │   ├── org1
+│   │   │   └── fabric-ca-server-config.yaml
+│   │   ├── org2
+│   │   │   └── fabric-ca-server-config.yaml
+│   │   ├── orgpolitica1
+│   │   │   ├── fabric-ca-server-config.yaml
+│   │   │   ├── fabric-ca-server.db
+│   │   │   ├── IssuerPublicKey
+│   │   │   ├── IssuerRevocationPublicKey
+│   │   │   └── msp
+│   │   │       └── keystore
+│   │   │           ├── 1bf044f73f9a18e081c3ee40e3a25932b7ab071de2ab719ad14c8a4c23531369_sk
+│   │   │           ├── 41ce96ccb816d2cebc0d14156c3bb10d1584d9e6a07809221dc01de2dad7e7e1_sk
+│   │   │           ├── 675964e73d4b3c2ff94a5ffa47e63253292fe78d0a2ff7dabd414436df1db939_sk
+│   │   │           ├── 684e71ea115ff7976d4fe34108dfde75a6ce03ecc90d0efe3e2f71aaaf06eece_sk
+│   │   │           ├── 747f6071461498f1c5ecbdebf43dbb33330ccb61fed280a8887df37a24943640_sk
+│   │   │           ├── 805acd67eb2c69c26b87e0a5fdc12be3731c1a21f97a4e31b6a6699c0f17510d_sk
+│   │   │           ├── 890b45d2e7befabdc4b0273d06ce6e19131c5bd07a1d35cad7d51d42d2979fdc_sk
+│   │   │           ├── 89c2232ba00903547ed783bcb5d84fe7cd851690d74ef2915d3657ad4c93279e_sk
+│   │   │           ├── 8be785c480cbd2e976966cdb4443b7df14764f1fef7b3081efbc1b6b1aa609c1_sk
+│   │   │           ├── 9315f6bcc29123009050cb5ef687c98589c6df01cf888497f7776ea4f907defd_sk
+│   │   │           ├── 9e27dba2aae75352a89c0fc080e1ee6b4130e400586a3d36df488c4714db7aef_sk
+│   │   │           ├── a42a8edb0548a1bfe91b00cef4da378f2b58722e249dbdc9cb0ad43d011ad0a9_sk
+│   │   │           ├── b9b1cdd3b725a42be64c7ca31e11b8321e6d224a03a318fa3560652fafc3d8d6_sk
+│   │   │           ├── e53f02f897bdbc93f5c01285797747cdac0ba68db12028f6609cb69e66a0e3b2_sk
+│   │   │           ├── IssuerRevocationPrivateKey
+│   │   │           └── IssuerSecretKey
+│   │   ├── orgpolitica2
+│   │   │   ├── fabric-ca-server-config.yaml
+│   │   │   ├── fabric-ca-server.db
+│   │   │   ├── IssuerPublicKey
+│   │   │   ├── IssuerRevocationPublicKey
+│   │   │   └── msp
+│   │   │       └── keystore
+│   │   │           ├── 21387cfe56f2d1c3dec17171d30c66d762156ce1b6f552102c7c4926bd1957ae_sk
+│   │   │           ├── 3040bb37cae478bee2fa32f4be281529059eca0c6544b9aafb7f30ef1842e4ac_sk
+│   │   │           ├── 3510e058df253c384a8917e7b54c2bb9b1b7b75dd5cf33b39ae5fbdf0a954a62_sk
+│   │   │           ├── 3a683f32e39106517873c1847f6cea0cee8d2cb29cf3bd4e8e14340da6fa1583_sk
+│   │   │           ├── 405758f88ca453110aa7bbcc8374256b13d53ceea070560f423e53a21586bda9_sk
+│   │   │           ├── 5e0bfe0a354857e9decbae0b11e0ceae47aebd5645ebbd02807c67063e91a6fe_sk
+│   │   │           ├── 680caf5732d494fce03cca4117cb07347ad824ae34e5955c078284c6c4b87bb7_sk
+│   │   │           ├── 68be541620f5089d2094fa908d83c288c6559a6bc8d52ce2f4e09beed3ab415e_sk
+│   │   │           ├── 76b3470bab024fdd6491c4fe50705626e9e8539e8d77f11ce6f498c4116e5315_sk
+│   │   │           ├── a17e1d0b54578ceffdc149a5efeff4ec8c08c94982234903479f66a21152c387_sk
+│   │   │           ├── c371fe479036f8fcbe2a1f82897402d15adad228ce4f40fd9ef084a5eefdb61b_sk
+│   │   │           ├── d96bd742e78c8bd7895f49f35ad8d216670093018a86cdab7e1448c83a9a8c4a_sk
+│   │   │           ├── eb4392d0dd2d8844c45f602175411e223d51eb2a1731c3dfb9914a08f5d4007d_sk
+│   │   │           ├── fcdf5960e957999b5a558527ae8e41c244743963bdd5135d790fd7c86d3d55c7_sk
+│   │   │           ├── IssuerRevocationPrivateKey
+│   │   │           └── IssuerSecretKey
+│   │   └── registerEnroll.sh
+│   ├── ordererOrganizations
+│   │   ├── cne.com
+│   │   │   ├── ca
+│   │   │   │   ├── ca.cne.com-cert.pem
+│   │   │   │   └── priv_sk
+│   │   │   ├── msp
+│   │   │   │   ├── admincerts
+│   │   │   │   │   └── Admin@cne.com-cert.pem
+│   │   │   │   ├── cacerts
+│   │   │   │   │   └── ca.cne.com-cert.pem
+│   │   │   │   └── tlscacerts
+│   │   │   │       └── tlsca.cne.com-cert.pem
+│   │   │   ├── orderers
+│   │   │   │   └── orderer.cne.com
+│   │   │   │       ├── msp
+│   │   │   │       │   ├── admincerts
+│   │   │   │       │   │   └── Admin@cne.com-cert.pem
+│   │   │   │       │   ├── cacerts
+│   │   │   │       │   │   └── ca.cne.com-cert.pem
+│   │   │   │       │   ├── keystore
+│   │   │   │       │   │   └── priv_sk
+│   │   │   │       │   ├── signcerts
+│   │   │   │       │   │   └── orderer.cne.com-cert.pem
+│   │   │   │       │   └── tlscacerts
+│   │   │   │       │       └── tlsca.cne.com-cert.pem
+│   │   │   │       └── tls
+│   │   │   │           ├── ca.crt
+│   │   │   │           ├── server.crt
+│   │   │   │           └── server.key
+│   │   │   ├── tlsca
+│   │   │   │   ├── priv_sk
+│   │   │   │   └── tlsca.cne.com-cert.pem
+│   │   │   └── users
+│   │   │       └── Admin@cne.com
+│   │   │           ├── msp
+│   │   │           │   ├── admincerts
+│   │   │           │   │   └── Admin@cne.com-cert.pem
+│   │   │           │   ├── cacerts
+│   │   │           │   │   └── ca.cne.com-cert.pem
+│   │   │           │   ├── keystore
+│   │   │           │   │   └── priv_sk
+│   │   │           │   ├── signcerts
+│   │   │           │   │   └── Admin@cne.com-cert.pem
+│   │   │           │   └── tlscacerts
+│   │   │           │       └── tlsca.cne.com-cert.pem
+│   │   │           └── tls
+│   │   │               ├── ca.crt
+│   │   │               ├── client.crt
+│   │   │               └── client.key
+│   │   ├── mediosdecomunicacion.com
+│   │   │   ├── ca
+│   │   │   │   ├── ca.mediosdecomunicacion.com-cert.pem
+│   │   │   │   └── priv_sk
+│   │   │   ├── msp
+│   │   │   │   ├── admincerts
+│   │   │   │   │   └── Admin@mediosdecomunicacion.com-cert.pem
+│   │   │   │   ├── cacerts
+│   │   │   │   │   └── ca.mediosdecomunicacion.com-cert.pem
+│   │   │   │   └── tlscacerts
+│   │   │   │       └── tlsca.mediosdecomunicacion.com-cert.pem
+│   │   │   ├── orderers
+│   │   │   │   └── orderer.mediosdecomunicacion.com
+│   │   │   │       ├── msp
+│   │   │   │       │   ├── admincerts
+│   │   │   │       │   │   └── Admin@mediosdecomunicacion.com-cert.pem
+│   │   │   │       │   ├── cacerts
+│   │   │   │       │   │   └── ca.mediosdecomunicacion.com-cert.pem
+│   │   │   │       │   ├── keystore
+│   │   │   │       │   │   └── priv_sk
+│   │   │   │       │   ├── signcerts
+│   │   │   │       │   │   └── orderer.mediosdecomunicacion.com-cert.pem
+│   │   │   │       │   └── tlscacerts
+│   │   │   │       │       └── tlsca.mediosdecomunicacion.com-cert.pem
+│   │   │   │       └── tls
+│   │   │   │           ├── ca.crt
+│   │   │   │           ├── server.crt
+│   │   │   │           └── server.key
+│   │   │   ├── tlsca
+│   │   │   │   ├── priv_sk
+│   │   │   │   └── tlsca.mediosdecomunicacion.com-cert.pem
+│   │   │   └── users
+│   │   │       └── Admin@mediosdecomunicacion.com
+│   │   │           ├── msp
+│   │   │           │   ├── admincerts
+│   │   │           │   │   └── Admin@mediosdecomunicacion.com-cert.pem
+│   │   │           │   ├── cacerts
+│   │   │           │   │   └── ca.mediosdecomunicacion.com-cert.pem
+│   │   │           │   ├── keystore
+│   │   │           │   │   └── priv_sk
+│   │   │           │   ├── signcerts
+│   │   │           │   │   └── Admin@mediosdecomunicacion.com-cert.pem
+│   │   │           │   └── tlscacerts
+│   │   │           │       └── tlsca.mediosdecomunicacion.com-cert.pem
+│   │   │           └── tls
+│   │   │               ├── ca.crt
+│   │   │               ├── client.crt
+│   │   │               └── client.key
+│   │   ├── moe.com
+│   │   │   ├── ca
+│   │   │   │   ├── ca.moe.com-cert.pem
+│   │   │   │   └── priv_sk
+│   │   │   ├── msp
+│   │   │   │   ├── admincerts
+│   │   │   │   │   └── Admin@moe.com-cert.pem
+│   │   │   │   ├── cacerts
+│   │   │   │   │   └── ca.moe.com-cert.pem
+│   │   │   │   └── tlscacerts
+│   │   │   │       └── tlsca.moe.com-cert.pem
+│   │   │   ├── orderers
+│   │   │   │   └── orderer.moe.com
+│   │   │   │       ├── msp
+│   │   │   │       │   ├── admincerts
+│   │   │   │       │   │   └── Admin@moe.com-cert.pem
+│   │   │   │       │   ├── cacerts
+│   │   │   │       │   │   └── ca.moe.com-cert.pem
+│   │   │   │       │   ├── keystore
+│   │   │   │       │   │   └── priv_sk
+│   │   │   │       │   ├── signcerts
+│   │   │   │       │   │   └── orderer.moe.com-cert.pem
+│   │   │   │       │   └── tlscacerts
+│   │   │   │       │       └── tlsca.moe.com-cert.pem
+│   │   │   │       └── tls
+│   │   │   │           ├── ca.crt
+│   │   │   │           ├── server.crt
+│   │   │   │           └── server.key
+│   │   │   ├── tlsca
+│   │   │   │   ├── priv_sk
+│   │   │   │   └── tlsca.moe.com-cert.pem
+│   │   │   └── users
+│   │   │       └── Admin@moe.com
+│   │   │           ├── msp
+│   │   │           │   ├── admincerts
+│   │   │           │   │   └── Admin@moe.com-cert.pem
+│   │   │           │   ├── cacerts
+│   │   │           │   │   └── ca.moe.com-cert.pem
+│   │   │           │   ├── keystore
+│   │   │           │   │   └── priv_sk
+│   │   │           │   ├── signcerts
+│   │   │           │   │   └── Admin@moe.com-cert.pem
+│   │   │           │   └── tlscacerts
+│   │   │           │       └── tlsca.moe.com-cert.pem
+│   │   │           └── tls
+│   │   │               ├── ca.crt
+│   │   │               ├── client.crt
+│   │   │               └── client.key
+│   │   ├── orgpolitica1.com
+│   │   │   ├── ca
+│   │   │   │   ├── ca.orgpolitica1.com-cert.pem
+│   │   │   │   └── priv_sk
+│   │   │   ├── msp
+│   │   │   │   ├── admincerts
+│   │   │   │   │   └── Admin@orgpolitica1.com-cert.pem
+│   │   │   │   ├── cacerts
+│   │   │   │   │   └── ca.orgpolitica1.com-cert.pem
+│   │   │   │   └── tlscacerts
+│   │   │   │       └── tlsca.orgpolitica1.com-cert.pem
+│   │   │   ├── orderers
+│   │   │   │   └── orderer.orgpolitica1.com
+│   │   │   │       ├── msp
+│   │   │   │       │   ├── admincerts
+│   │   │   │       │   │   └── Admin@orgpolitica1.com-cert.pem
+│   │   │   │       │   ├── cacerts
+│   │   │   │       │   │   └── ca.orgpolitica1.com-cert.pem
+│   │   │   │       │   ├── keystore
+│   │   │   │       │   │   └── priv_sk
+│   │   │   │       │   ├── signcerts
+│   │   │   │       │   │   └── orderer.orgpolitica1.com-cert.pem
+│   │   │   │       │   └── tlscacerts
+│   │   │   │       │       └── tlsca.orgpolitica1.com-cert.pem
+│   │   │   │       └── tls
+│   │   │   │           ├── ca.crt
+│   │   │   │           ├── server.crt
+│   │   │   │           └── server.key
+│   │   │   ├── tlsca
+│   │   │   │   ├── priv_sk
+│   │   │   │   └── tlsca.orgpolitica1.com-cert.pem
+│   │   │   └── users
+│   │   │       └── Admin@orgpolitica1.com
+│   │   │           ├── msp
+│   │   │           │   ├── admincerts
+│   │   │           │   │   └── Admin@orgpolitica1.com-cert.pem
+│   │   │           │   ├── cacerts
+│   │   │           │   │   └── ca.orgpolitica1.com-cert.pem
+│   │   │           │   ├── keystore
+│   │   │           │   │   └── priv_sk
+│   │   │           │   ├── signcerts
+│   │   │           │   │   └── Admin@orgpolitica1.com-cert.pem
+│   │   │           │   └── tlscacerts
+│   │   │           │       └── tlsca.orgpolitica1.com-cert.pem
+│   │   │           └── tls
+│   │   │               ├── ca.crt
+│   │   │               ├── client.crt
+│   │   │               └── client.key
+│   │   └── orgpolitica2.com
+│   │       ├── ca
+│   │       │   ├── ca.orgpolitica2.com-cert.pem
+│   │       │   └── priv_sk
+│   │       ├── msp
+│   │       │   ├── admincerts
+│   │       │   │   └── Admin@orgpolitica2.com-cert.pem
+│   │       │   ├── cacerts
+│   │       │   │   └── ca.orgpolitica2.com-cert.pem
+│   │       │   └── tlscacerts
+│   │       │       └── tlsca.orgpolitica2.com-cert.pem
+│   │       ├── orderers
+│   │       │   └── orderer.orgpolitica2.com
+│   │       │       ├── msp
+│   │       │       │   ├── admincerts
+│   │       │       │   │   └── Admin@orgpolitica2.com-cert.pem
+│   │       │       │   ├── cacerts
+│   │       │       │   │   └── ca.orgpolitica2.com-cert.pem
+│   │       │       │   ├── keystore
+│   │       │       │   │   └── priv_sk
+│   │       │       │   ├── signcerts
+│   │       │       │   │   └── orderer.orgpolitica2.com-cert.pem
+│   │       │       │   └── tlscacerts
+│   │       │       │       └── tlsca.orgpolitica2.com-cert.pem
+│   │       │       └── tls
+│   │       │           ├── ca.crt
+│   │       │           ├── server.crt
+│   │       │           └── server.key
+│   │       ├── tlsca
+│   │       │   ├── priv_sk
+│   │       │   └── tlsca.orgpolitica2.com-cert.pem
+│   │       └── users
+│   │           └── Admin@orgpolitica2.com
+│   │               ├── msp
+│   │               │   ├── admincerts
+│   │               │   │   └── Admin@orgpolitica2.com-cert.pem
+│   │               │   ├── cacerts
+│   │               │   │   └── ca.orgpolitica2.com-cert.pem
+│   │               │   ├── keystore
+│   │               │   │   └── priv_sk
+│   │               │   ├── signcerts
+│   │               │   │   └── Admin@orgpolitica2.com-cert.pem
+│   │               │   └── tlscacerts
+│   │               │       └── tlsca.orgpolitica2.com-cert.pem
+│   │               └── tls
+│   │                   ├── ca.crt
+│   │                   ├── client.crt
+│   │                   └── client.key
+│   └── peerOrganizations
+│       ├── cne.com
+│       │   ├── ca
+│       │   │   ├── ca.cne.com-cert.pem
+│       │   │   └── priv_sk
+│       │   ├── msp
+│       │   │   ├── admincerts
+│       │   │   │   └── Admin@cne.com-cert.pem
+│       │   │   ├── cacerts
+│       │   │   │   └── ca.cne.com-cert.pem
+│       │   │   └── tlscacerts
+│       │   │       └── tlsca.cne.com-cert.pem
+│       │   ├── peers
+│       │   │   └── peer0.cne.com
+│       │   │       ├── msp
+│       │   │       │   ├── admincerts
+│       │   │       │   │   └── Admin@cne.com-cert.pem
+│       │   │       │   ├── cacerts
+│       │   │       │   │   └── ca.cne.com-cert.pem
+│       │   │       │   ├── keystore
+│       │   │       │   │   └── priv_sk
+│       │   │       │   ├── signcerts
+│       │   │       │   │   └── peer0.cne.com-cert.pem
+│       │   │       │   └── tlscacerts
+│       │   │       │       └── tlsca.cne.com-cert.pem
+│       │   │       └── tls
+│       │   │           ├── ca.crt
+│       │   │           ├── server.crt
+│       │   │           └── server.key
+│       │   ├── tlsca
+│       │   │   ├── priv_sk
+│       │   │   └── tlsca.cne.com-cert.pem
+│       │   └── users
+│       │       ├── Admin@cne.com
+│       │       │   ├── msp
+│       │       │   │   ├── admincerts
+│       │       │   │   │   └── Admin@cne.com-cert.pem
+│       │       │   │   ├── cacerts
+│       │       │   │   │   └── ca.cne.com-cert.pem
+│       │       │   │   ├── keystore
+│       │       │   │   │   └── priv_sk
+│       │       │   │   ├── signcerts
+│       │       │   │   │   └── Admin@cne.com-cert.pem
+│       │       │   │   └── tlscacerts
+│       │       │   │       └── tlsca.cne.com-cert.pem
+│       │       │   └── tls
+│       │       │       ├── ca.crt
+│       │       │       ├── client.crt
+│       │       │       └── client.key
+│       │       └── User1@cne.com
+│       │           ├── msp
+│       │           │   ├── admincerts
+│       │           │   │   └── User1@cne.com-cert.pem
+│       │           │   ├── cacerts
+│       │           │   │   └── ca.cne.com-cert.pem
+│       │           │   ├── keystore
+│       │           │   │   └── priv_sk
+│       │           │   ├── signcerts
+│       │           │   │   └── User1@cne.com-cert.pem
+│       │           │   └── tlscacerts
+│       │           │       └── tlsca.cne.com-cert.pem
+│       │           └── tls
+│       │               ├── ca.crt
+│       │               ├── client.crt
+│       │               └── client.key
+│       ├── mediosdecomunicacion.com
+│       │   ├── ca
+│       │   │   ├── ca.mediosdecomunicacion.com-cert.pem
+│       │   │   └── priv_sk
+│       │   ├── msp
+│       │   │   ├── admincerts
+│       │   │   │   └── Admin@mediosdecomunicacion.com-cert.pem
+│       │   │   ├── cacerts
+│       │   │   │   └── ca.mediosdecomunicacion.com-cert.pem
+│       │   │   └── tlscacerts
+│       │   │       └── tlsca.mediosdecomunicacion.com-cert.pem
+│       │   ├── peers
+│       │   │   └── peer0.mediosdecomunicacion.com
+│       │   │       ├── msp
+│       │   │       │   ├── admincerts
+│       │   │       │   │   └── Admin@mediosdecomunicacion.com-cert.pem
+│       │   │       │   ├── cacerts
+│       │   │       │   │   └── ca.mediosdecomunicacion.com-cert.pem
+│       │   │       │   ├── keystore
+│       │   │       │   │   └── priv_sk
+│       │   │       │   ├── signcerts
+│       │   │       │   │   └── peer0.mediosdecomunicacion.com-cert.pem
+│       │   │       │   └── tlscacerts
+│       │   │       │       └── tlsca.mediosdecomunicacion.com-cert.pem
+│       │   │       └── tls
+│       │   │           ├── ca.crt
+│       │   │           ├── server.crt
+│       │   │           └── server.key
+│       │   ├── tlsca
+│       │   │   ├── priv_sk
+│       │   │   └── tlsca.mediosdecomunicacion.com-cert.pem
+│       │   └── users
+│       │       ├── Admin@mediosdecomunicacion.com
+│       │       │   ├── msp
+│       │       │   │   ├── admincerts
+│       │       │   │   │   └── Admin@mediosdecomunicacion.com-cert.pem
+│       │       │   │   ├── cacerts
+│       │       │   │   │   └── ca.mediosdecomunicacion.com-cert.pem
+│       │       │   │   ├── keystore
+│       │       │   │   │   └── priv_sk
+│       │       │   │   ├── signcerts
+│       │       │   │   │   └── Admin@mediosdecomunicacion.com-cert.pem
+│       │       │   │   └── tlscacerts
+│       │       │   │       └── tlsca.mediosdecomunicacion.com-cert.pem
+│       │       │   └── tls
+│       │       │       ├── ca.crt
+│       │       │       ├── client.crt
+│       │       │       └── client.key
+│       │       └── User1@mediosdecomunicacion.com
+│       │           ├── msp
+│       │           │   ├── admincerts
+│       │           │   │   └── User1@mediosdecomunicacion.com-cert.pem
+│       │           │   ├── cacerts
+│       │           │   │   └── ca.mediosdecomunicacion.com-cert.pem
+│       │           │   ├── keystore
+│       │           │   │   └── priv_sk
+│       │           │   ├── signcerts
+│       │           │   │   └── User1@mediosdecomunicacion.com-cert.pem
+│       │           │   └── tlscacerts
+│       │           │       └── tlsca.mediosdecomunicacion.com-cert.pem
+│       │           └── tls
+│       │               ├── ca.crt
+│       │               ├── client.crt
+│       │               └── client.key
+│       ├── moe.com
+│       │   ├── ca
+│       │   │   ├── ca.moe.com-cert.pem
+│       │   │   └── priv_sk
+│       │   ├── msp
+│       │   │   ├── admincerts
+│       │   │   │   └── Admin@moe.com-cert.pem
+│       │   │   ├── cacerts
+│       │   │   │   └── ca.moe.com-cert.pem
+│       │   │   └── tlscacerts
+│       │   │       └── tlsca.moe.com-cert.pem
+│       │   ├── peers
+│       │   │   └── peer0.moe.com
+│       │   │       ├── msp
+│       │   │       │   ├── admincerts
+│       │   │       │   │   └── Admin@moe.com-cert.pem
+│       │   │       │   ├── cacerts
+│       │   │       │   │   └── ca.moe.com-cert.pem
+│       │   │       │   ├── keystore
+│       │   │       │   │   └── priv_sk
+│       │   │       │   ├── signcerts
+│       │   │       │   │   └── peer0.moe.com-cert.pem
+│       │   │       │   └── tlscacerts
+│       │   │       │       └── tlsca.moe.com-cert.pem
+│       │   │       └── tls
+│       │   │           ├── ca.crt
+│       │   │           ├── server.crt
+│       │   │           └── server.key
+│       │   ├── tlsca
+│       │   │   ├── priv_sk
+│       │   │   └── tlsca.moe.com-cert.pem
+│       │   └── users
+│       │       ├── Admin@moe.com
+│       │       │   ├── msp
+│       │       │   │   ├── admincerts
+│       │       │   │   │   └── Admin@moe.com-cert.pem
+│       │       │   │   ├── cacerts
+│       │       │   │   │   └── ca.moe.com-cert.pem
+│       │       │   │   ├── keystore
+│       │       │   │   │   └── priv_sk
+│       │       │   │   ├── signcerts
+│       │       │   │   │   └── Admin@moe.com-cert.pem
+│       │       │   │   └── tlscacerts
+│       │       │   │       └── tlsca.moe.com-cert.pem
+│       │       │   └── tls
+│       │       │       ├── ca.crt
+│       │       │       ├── client.crt
+│       │       │       └── client.key
+│       │       └── User1@moe.com
+│       │           ├── msp
+│       │           │   ├── admincerts
+│       │           │   │   └── User1@moe.com-cert.pem
+│       │           │   ├── cacerts
+│       │           │   │   └── ca.moe.com-cert.pem
+│       │           │   ├── keystore
+│       │           │   │   └── priv_sk
+│       │           │   ├── signcerts
+│       │           │   │   └── User1@moe.com-cert.pem
+│       │           │   └── tlscacerts
+│       │           │       └── tlsca.moe.com-cert.pem
+│       │           └── tls
+│       │               ├── ca.crt
+│       │               ├── client.crt
+│       │               └── client.key
+│       ├── orgpolitica1.com
+│       │   ├── ca
+│       │   │   ├── ca.orgpolitica1.com-cert.pem
+│       │   │   └── priv_sk
+│       │   ├── msp
+│       │   │   ├── admincerts
+│       │   │   │   └── Admin@orgpolitica1.com-cert.pem
+│       │   │   ├── cacerts
+│       │   │   │   └── ca.orgpolitica1.com-cert.pem
+│       │   │   └── tlscacerts
+│       │   │       └── tlsca.orgpolitica1.com-cert.pem
+│       │   ├── peers
+│       │   │   └── peer0.orgpolitica1.com
+│       │   │       ├── msp
+│       │   │       │   ├── admincerts
+│       │   │       │   │   └── Admin@orgpolitica1.com-cert.pem
+│       │   │       │   ├── cacerts
+│       │   │       │   │   └── ca.orgpolitica1.com-cert.pem
+│       │   │       │   ├── keystore
+│       │   │       │   │   └── priv_sk
+│       │   │       │   ├── signcerts
+│       │   │       │   │   └── peer0.orgpolitica1.com-cert.pem
+│       │   │       │   └── tlscacerts
+│       │   │       │       └── tlsca.orgpolitica1.com-cert.pem
+│       │   │       └── tls
+│       │   │           ├── ca.crt
+│       │   │           ├── server.crt
+│       │   │           └── server.key
+│       │   ├── tlsca
+│       │   │   ├── priv_sk
+│       │   │   └── tlsca.orgpolitica1.com-cert.pem
+│       │   └── users
+│       │       ├── Admin@orgpolitica1.com
+│       │       │   ├── msp
+│       │       │   │   ├── admincerts
+│       │       │   │   │   └── Admin@orgpolitica1.com-cert.pem
+│       │       │   │   ├── cacerts
+│       │       │   │   │   └── ca.orgpolitica1.com-cert.pem
+│       │       │   │   ├── keystore
+│       │       │   │   │   └── priv_sk
+│       │       │   │   ├── signcerts
+│       │       │   │   │   └── Admin@orgpolitica1.com-cert.pem
+│       │       │   │   └── tlscacerts
+│       │       │   │       └── tlsca.orgpolitica1.com-cert.pem
+│       │       │   └── tls
+│       │       │       ├── ca.crt
+│       │       │       ├── client.crt
+│       │       │       └── client.key
+│       │       └── User1@orgpolitica1.com
+│       │           ├── msp
+│       │           │   ├── admincerts
+│       │           │   │   └── User1@orgpolitica1.com-cert.pem
+│       │           │   ├── cacerts
+│       │           │   │   └── ca.orgpolitica1.com-cert.pem
+│       │           │   ├── keystore
+│       │           │   │   └── priv_sk
+│       │           │   ├── signcerts
+│       │           │   │   └── User1@orgpolitica1.com-cert.pem
+│       │           │   └── tlscacerts
+│       │           │       └── tlsca.orgpolitica1.com-cert.pem
+│       │           └── tls
+│       │               ├── ca.crt
+│       │               ├── client.crt
+│       │               └── client.key
+│       └── orgpolitica2.com
+│           ├── ca
+│           │   ├── ca.orgpolitica2.com-cert.pem
+│           │   └── priv_sk
+│           ├── msp
+│           │   ├── admincerts
+│           │   │   └── Admin@orgpolitica2.com-cert.pem
+│           │   ├── cacerts
+│           │   │   └── ca.orgpolitica2.com-cert.pem
+│           │   └── tlscacerts
+│           │       └── tlsca.orgpolitica2.com-cert.pem
+│           ├── peers
+│           │   └── peer0.orgpolitica2.com
+│           │       ├── msp
+│           │       │   ├── admincerts
+│           │       │   │   └── Admin@orgpolitica2.com-cert.pem
+│           │       │   ├── cacerts
+│           │       │   │   └── ca.orgpolitica2.com-cert.pem
+│           │       │   ├── keystore
+│           │       │   │   └── priv_sk
+│           │       │   ├── signcerts
+│           │       │   │   └── peer0.orgpolitica2.com-cert.pem
+│           │       │   └── tlscacerts
+│           │       │       └── tlsca.orgpolitica2.com-cert.pem
+│           │       └── tls
+│           │           ├── ca.crt
+│           │           ├── server.crt
+│           │           └── server.key
+│           ├── tlsca
+│           │   ├── priv_sk
+│           │   └── tlsca.orgpolitica2.com-cert.pem
+│           └── users
+│               ├── Admin@orgpolitica2.com
+│               │   ├── msp
+│               │   │   ├── admincerts
+│               │   │   │   └── Admin@orgpolitica2.com-cert.pem
+│               │   │   ├── cacerts
+│               │   │   │   └── ca.orgpolitica2.com-cert.pem
+│               │   │   ├── keystore
+│               │   │   │   └── priv_sk
+│               │   │   ├── signcerts
+│               │   │   │   └── Admin@orgpolitica2.com-cert.pem
+│               │   │   └── tlscacerts
+│               │   │       └── tlsca.orgpolitica2.com-cert.pem
+│               │   └── tls
+│               │       ├── ca.crt
+│               │       ├── client.crt
+│               │       └── client.key
+│               └── User1@orgpolitica2.com
+│                   ├── msp
+│                   │   ├── admincerts
+│                   │   │   └── User1@orgpolitica2.com-cert.pem
+│                   │   ├── cacerts
+│                   │   │   └── ca.orgpolitica2.com-cert.pem
+│                   │   ├── keystore
+│                   │   │   └── priv_sk
+│                   │   ├── signcerts
+│                   │   │   └── User1@orgpolitica2.com-cert.pem
+│                   │   └── tlscacerts
+│                   │       └── tlsca.orgpolitica2.com-cert.pem
+│                   └── tls
+│                       ├── ca.crt
+│                       ├── client.crt
+│                       └── client.key
+├── PKI.sh
+├── prometheus-grafana
+│   ├── docker-compose.yaml
+│   ├── grafana
+│   │   ├── config.monitoring
+│   │   └── provisioning
+│   │       ├── dashboards
+│   │       │   ├── dashboard.yml
+│   │       │   └── hlf-performances.json
+│   │       └── datasources
+│   │           └── datasource.yml
+│   ├── grafana_db
+│   │   └── grafana.db
+│   ├── prometheus
+│   │   └── prometheus.yml
+│   └── README.md
+├── README.md
+├── scripts
+│   ├── ccutils.sh
+│   ├── configUpdate.sh
+│   ├── createChannel.sh
+│   ├── deployCCAAS.sh
+│   ├── deployCC.sh
+│   ├── envVar.sh
+│   ├── org3-scripts
+│   │   ├── joinChannel.sh
+│   │   └── updateChannelConfig.sh
+│   ├── pkgcc.sh
+│   ├── setAnchorPeer.sh
+│   └── utils.sh
+├── ScriptsPKI
+│   ├── cleanConfigtx.sh
+│   ├── configtxCreate.sh
+│   ├── cryptoMaterial.sh
+│   ├── init-docker.sh
+│   ├── joinChannel.sh
+│   └── stop-docker.sh
+├── setOrgEnv.sh
+├── system-genesis-block
+│   └── genesis.block
+└── treeTestNetwork.txt
+
+339 directories, 416 files
