@@ -5,10 +5,11 @@
 
 version: '3.7'
 
-# volumes:
-#   orderer.example.com:
-#   peer0.org1.example.com:
-#   peer0.org2.example.com:
+volumes:
+  orderer.cne.com:
+  orderer.moe.com:
+  peer0.cne.example.com:
+  peer0.moe.example.com:
 
 networks:
   test:

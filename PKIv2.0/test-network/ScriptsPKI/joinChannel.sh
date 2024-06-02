@@ -26,7 +26,7 @@ export CORE_PEER_ADDRESS=peer0.cne.com:7051
 
 # Create the channel
 echo "Creating the channel..."
-sudo peer channel create -o orderer.cne.com:7050 -c mychannel -f $CHANNEL_ARTIFACTS_DIR/channel.tx --outputBlock $CHANNEL_ARTIFACTS_DIR/mychannel.block --tls --cafile $CORE_PEER_TLS_ROOTCERT_FILE
+peer channel create -o orderer.cne.com:7050 -c mychannel -f $CHANNEL_ARTIFACTS_DIR/channel.tx --outputBlock $CHANNEL_ARTIFACTS_DIR/mychannel.block --tls --cafile $CORE_PEER_TLS_ROOTCERT_FILE
 
 # Join the CNE peer to the channel
 echo "Joining CNE to the channel..."

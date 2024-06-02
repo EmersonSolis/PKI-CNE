@@ -127,6 +127,36 @@ Organizations:
                 Type: Signature
                 Rule: "OR('MOEMSP.admin')"
 
+    - &OrdererCNE
+        Name: OrdererCNEOrg
+        ID: OrdererCNEMSP
+        MSPDir: ../organizations/ordererOrganizations/cne.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('OrdererCNEMSP.member')"
+            Writers:
+                Type: Signature
+                Rule: "OR('OrdererCNEMSP.member')"
+            Admins:
+                Type: Signature
+                Rule: "OR('OrdererCNEMSP.admin')"
+
+    - &OrdererMOE
+        Name: OrdererMOEOrg
+        ID: OrdererMOEMSP
+        MSPDir: ../organizations/ordererOrganizations/moe.com/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('OrdererMOEMSP.member')"
+            Writers:
+                Type: Signature
+                Rule: "OR('OrdererMOEMSP.member')"
+            Admins:
+                Type: Signature
+                Rule: "OR('OrdererMOEMSP.admin')"
+
     # - &OrgPolitica1
     #     Name: OrgPolitica1MSP
     #     ID: OrgPolitica1MSP
@@ -405,8 +435,8 @@ Profiles:
         Orderer:
             <<: *OrdererDefaults
             Organizations:
-                - *CNE
-                - *MOE
+                - *OrdererCNE
+                - *OrdererMOE
                 # - *OrgPolitica1
                 # - *OrgPolitica2
                 # - *MediosDeComunicacion
