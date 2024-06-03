@@ -12,13 +12,13 @@ case "$ACTION" in
         CHANNEL_ARTIFACTS_DIR=${FABRIC_CFG_PATH}/channel-artifacts
 
         # Genesis Block
-        configtxgen -profile TwoOrgsApplicationGenesis -outputBlock $GENESIS_BLOCK_DIR/genesis.block -channelID OrdererChannel
+        configtxgen -profile TwoOrgsApplicationGenesis -outputBlock $GENESIS_BLOCK_DIR/genesis.block -channelID system-channel
         # Channel Tx 
-        configtxgen -profile TwoOrgsChannel -outputCreateChannelTx $CHANNEL_ARTIFACTS_DIR/channel.tx -channelID CNEChannel
+        configtxgen -profile TwoOrgsChannel -outputCreateChannelTx $CHANNEL_ARTIFACTS_DIR/channel.tx -channelID mychannel
         ;;
     delete)
         echo "----------------------------------------------------------"
-        echo "Eliminando material criptográfico"
+        echo "Eliminando material configtx"
         echo "----------------------------------------------------------"
         sudo rm -rf ../configtx/channel-artifacts/
         sudo rm -rf ../configtx/system-genesis-block/

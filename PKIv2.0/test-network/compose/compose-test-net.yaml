@@ -174,7 +174,7 @@ services:
     volumes:
       - ../configtx/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
       - ../organizations/ordererOrganizations/cne.com/orderers/orderer.cne.com/msp:/var/hyperledger/orderer/msp
-      - ../organizations/ordererOrganizations/cne.com/orderers/orderer.cne.com/tls/:/var/hyperledger/orderer/tls
+      - ../organizations/ordererOrganizations/cne.com/orderers/orderer.cne.com/tls:/var/hyperledger/orderer/tls
     ports:
       - 7050:7050
     networks:
@@ -197,7 +197,7 @@ services:
     volumes:
       - ../configtx/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
       - ../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/msp:/var/hyperledger/orderer/msp
-      - ../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/tls/:/var/hyperledger/orderer/tls
+      - ../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/tls:/var/hyperledger/orderer/tls
     ports:
       - 8050:8050
     networks:
