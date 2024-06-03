@@ -442,7 +442,7 @@ Profiles:
                 # - *MediosDeComunicacion
             Capabilities: *OrdererCapabilities
         Consortiums:
-            SampleConsortium:
+            CneConsortium:
                 Organizations:
                     - *CNE
                     - *MOE
@@ -462,7 +462,11 @@ Profiles:
     
     TwoOrgsChannel:
         <<: *ChannelDefaults
-        Consortium: CneConsortium
+        Consortium: 
+            CneConsortium:
+                Organizations:
+                    - *CNE
+                    - *MOE
         Application:
             <<: *ApplicationDefaults
             Organizations:

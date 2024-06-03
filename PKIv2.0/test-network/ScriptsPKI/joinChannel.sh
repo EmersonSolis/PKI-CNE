@@ -23,11 +23,14 @@ export CORE_PEER_TLS_ROOTCERT_FILE=$(realpath ${PWD}/../organizations/peerOrgani
 export CORE_PEER_MSPCONFIGPATH=$(realpath ${PWD}/../organizations/peerOrganizations/cne.com/users/Admin@cne.com/msp)
 export CORE_PEER_ADDRESS=peer0.cne.com:7051
 
+# Define the orderer CA certificate
+ORDERER_CA=$(realpath ${PWD}/../organizations/ordererOrganizations/cne.com/orderers/orderer.cne.com/tls/ca.crt)
 
 # Create the channel
 echo "Creating the channel..."
-peer channel create -o orderer.cne.com:7050 -c mychannel -f $CHANNEL_ARTIFACTS_DIR/channel.tx --outputBlock $CHANNEL_ARTIFACTS_DIR/mychannel.block --tls --cafile $CORE_PEER_TLS_ROOTCERT_FILE
+peer channel create -o orderer.cne.com:7050 -c mychannel -f $CHANNEL_ARTIFACTS_DIR/channel.tx --outputBlock $CHANNEL_ARTIFACTS_DIR/mychannel.block --tls --cafile $ORDERER_CA
 
 # Join the CNE peer to the channel
+export FABRIC_CFG_PATH=$(realpath ${PWD}/../compose/docker/peercfg/CNE)
 echo "Joining CNE to the channel..."
 sudo peer channel join -b $CHANNEL_ARTIFACTS_DIR/mychannel.block --tls --cafile $CORE_PEER_TLS_ROOTCERT_FILE
