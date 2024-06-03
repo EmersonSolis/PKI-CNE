@@ -462,11 +462,7 @@ Profiles:
     
     TwoOrgsChannel:
         <<: *ChannelDefaults
-        Consortium: 
-            CneConsortium:
-                Organizations:
-                    - *CNE
-                    - *MOE
+        Consortium: CneConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
