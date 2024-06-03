@@ -16,7 +16,7 @@ case "$ACTION" in
         # Channel Tx 
         configtxgen -profile TwoOrgsChannel -outputCreateChannelTx $CHANNEL_ARTIFACTS_DIR/channel.tx -channelID mychannel
         ;;
-    delete)
+    clean)
         echo "----------------------------------------------------------"
         echo "Eliminando material configtx"
         echo "----------------------------------------------------------"
@@ -24,7 +24,7 @@ case "$ACTION" in
         sudo rm -rf ../configtx/system-genesis-block/
         ;;
     *)
-        echo "Parámetro no válido. Use: $0 {create|delete}"
+        echo "Parámetro no válido. Use: $0 {create|clean}"
         exit 1
         ;;
 esac
