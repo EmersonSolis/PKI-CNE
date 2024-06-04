@@ -9,12 +9,26 @@ case "$ACTION" in
         echo "Iniciado docker compose-ca..."
         echo "----------------------------------------------------------"
         sudo docker-compose -f ../compose/compose-ca.yaml up -d
-        ;;
+        
 
         # Enroll de las CA
 
+        # CNE
+        infoln "Enrolling the CA admin"
+        mkdir -p ../organizations/peerOrganizations/cne.com/
+        export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/org1.example.com/
+
+        set -x
+        fabric-ca-client enroll -u https://admin:adminpw@localhost:7054 --caname ca-cne --tls.certfiles "${PWD}/../organizations/fabric-ca/cne/ca-cert.pem"
+        { set +x; } 2>/dev/null
 
 
+
+        # MOE
+
+
+
+        ;;
     down)
         # Detener Docker de las CA
         echo "----------------------------------------------------------"
