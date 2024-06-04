@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Inciar Docker de las CA
-echo "----------------------------------------------------------"
-echo "Iniciado docker compose-ca..."
-echo "----------------------------------------------------------"
-sudo docker-compose -f ../compose/compose-ca.yaml up -d
-
 # Inciar Docker de couchdb
 # echo "----------------------------------------------------------"
 # echo "Iniciado docker compose-couch..."
