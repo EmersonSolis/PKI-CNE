@@ -112,6 +112,9 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('CNEMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('CNEMSP.peer')"
     - &MOE
         Name: MOEMSP
         ID: MOEMSP
@@ -126,6 +129,9 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('MOEMSP.admin')"
+            Endorsement:
+                Type: Signature
+                Rule: "OR('MOEMSP.peer')"
 
     - &OrdererCNE
         Name: OrdererCNEOrg
