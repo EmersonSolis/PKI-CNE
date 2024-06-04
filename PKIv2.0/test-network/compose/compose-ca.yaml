@@ -7,13 +7,13 @@ version: '3.7'
 
 networks:
   test:
-    name: fabric-ca
+    name: fabric_test
 
 services:
 # ----------------------------------------------------------
 #                 Entidad Certificadora TLS(CA TLS)
 # ----------------------------------------------------------
-  ca-tls-cne:
+  ca_cne:
     image: hyperledger/fabric-ca:latest
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     labels:
@@ -29,11 +29,11 @@ services:
       - "17054:17054"
     volumes:
       - ../organizations/fabric-ca/cne:/etc/hyperledger/fabric-ca-server
-    container_name: ca-tls-cne
+    container_name: ca_cne
     networks:
       - test
 
-  ca-tls-moe:
+  ca_moe:
     image: hyperledger/fabric-ca:latest
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     labels:
@@ -53,65 +53,45 @@ services:
     networks:
       - test
 
-  # ca_orgpolitica1:
-  #   image: hyperledger/fabric-ca:latest
-  #   labels:
-  #     service: hyperledger-fabric
-  #   environment:
-  #     - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-  #     - FABRIC_CA_SERVER_CA_NAME=ca-orgpolitica1
-  #     - FABRIC_CA_SERVER_TLS_ENABLED=true
-  #     - FABRIC_CA_SERVER_PORT=9054
-  #     - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
-  #   ports:
-  #     - "9054:9054"
-  #     - "19054:19054"
-  #   command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-  #   volumes:
-  #     - ../organizations/fabric-ca/orgpolitica1:/etc/hyperledger/fabric-ca-server
-  #   container_name: ca_orgpolitica1
-  #   networks:
-  #     - test
+  ca_cne_orderer:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orderer
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=9054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
+    ports:
+      - "7055:7055"
+      - "17055:17055"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/ordererCne:/etc/hyperledger/fabric-ca-server
+    container_name: ca_cne_orderer
+    networks:
+      - test
 
-  # ca_orgpolitica2:
-  #   image: hyperledger/fabric-ca:latest
-  #   labels:
-  #     service: hyperledger-fabric
-  #   environment:
-  #     - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-  #     - FABRIC_CA_SERVER_CA_NAME=ca-orgpolitica2
-  #     - FABRIC_CA_SERVER_TLS_ENABLED=true
-  #     - FABRIC_CA_SERVER_PORT=10054
-  #     - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:20054
-  #   ports:
-  #     - "10054:10054"
-  #     - "20054:20054"
-  #   command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-  #   volumes:
-  #     - ../organizations/fabric-ca/orgpolitica2:/etc/hyperledger/fabric-ca-server
-  #   container_name: ca_orgpolitica2
-  #   networks:
-  #     - test
-
-  # ca_mediosdecomunicacion:
-  #   image: hyperledger/fabric-ca:latest
-  #   labels:
-  #     service: hyperledger-fabric
-  #   environment:
-  #     - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-  #     - FABRIC_CA_SERVER_CA_NAME=ca-mediosdecomunicacion
-  #     - FABRIC_CA_SERVER_TLS_ENABLED=true
-  #     - FABRIC_CA_SERVER_PORT=11054
-  #     - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:21054
-  #   ports:
-  #     - "11054:11054"
-  #     - "21054:21054"
-  #   command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-  #   volumes:
-  #     - ../organizations/fabric-ca/mediosdecomunicacion:/etc/hyperledger/fabric-ca-server
-  #   container_name: ca_mediosdecomunicacion
-  #   networks:
-  #     - test
+  ca_moe_orderer:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orderer
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=9054
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
+    ports:
+      - "8055:8055"
+      - "18055:18055"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/ordererMoe:/etc/hyperledger/fabric-ca-server
+    container_name: ca_moe_orderer
+    networks:
+      - test
 
   # ca_org1:
   #   image: hyperledger/fabric-ca:latest
