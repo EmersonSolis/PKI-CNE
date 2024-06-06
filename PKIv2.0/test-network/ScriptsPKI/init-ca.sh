@@ -9,25 +9,6 @@ case "$ACTION" in
         echo "Iniciado docker compose-ca..."
         echo "----------------------------------------------------------"
         sudo docker-compose -f ../compose/compose-ca.yaml up -d
-        
-
-        # Enroll de las CA
-
-        # CNE
-        infoln "Enrolling the CA admin"
-        mkdir -p ../organizations/peerOrganizations/cne.com/
-        export FABRIC_CA_CLIENT_HOME=${PWD}/organizations/peerOrganizations/org1.example.com/
-
-        set -x
-        fabric-ca-client enroll -u https://admin:adminpw@localhost:7054 --caname ca-cne --tls.certfiles "${PWD}/../organizations/fabric-ca/cne/ca-cert.pem"
-        { set +x; } 2>/dev/null
-
-
-
-        # MOE
-
-
-
         ;;
     down)
         # Detener Docker de las CA
@@ -40,36 +21,41 @@ case "$ACTION" in
         echo "----------------------------------------------------------"
         echo "Eliminando archivos fabric-ca"
         echo "----------------------------------------------------------"
+  
         # CNE
+        sudo find ../organizations/fabric-ca/cne -type f ! -name 'fabric-ca-server-config.yaml' -print0 | sudo xargs -0 rm -f
         sudo rm -rf ../organizations/fabric-ca/cne/msp
-        sudo rm -f ../organizations/fabric-ca/cne/IssuerPublicKey
-        sudo rm -f ../organizations/fabric-ca/cne/IssuerRevocationPublicKey
-        sudo rm -f ../organizations/fabric-ca/cne/fabric-ca-server.db
-        sudo rm -f ../organizations/fabric-ca/cne/ca-cert.pem
-        sudo rm -f ../organizations/fabric-ca/cne/tls-cert.pem
+        # sudo rm -f ../organizations/fabric-ca/cne/IssuerPublicKey
+        # sudo rm -f ../organizations/fabric-ca/cne/IssuerRevocationPublicKey
+        # sudo rm -f ../organizations/fabric-ca/cne/fabric-ca-server.db
+        # sudo rm -f ../organizations/fabric-ca/cne/ca-cert.pem
+        # sudo rm -f ../organizations/fabric-ca/cne/tls-cert.pem
         
+        sudo find ../organizations/fabric-ca/ordererCne -type f ! -name 'fabric-ca-server-config.yaml' -print0 | sudo xargs -0 rm -f
         sudo rm -rf ../organizations/fabric-ca/ordererCne/msp
-        sudo rm -f ../organizations/fabric-ca/ordererCne/IssuerPublicKey
-        sudo rm -f ../organizations/fabric-ca/ordererCne/IssuerRevocationPublicKey
-        sudo rm -f ../organizations/fabric-ca/ordererCne/fabric-ca-server.db
-        sudo rm -f ../organizations/fabric-ca/ordererCne/ca-cert.pem
-        sudo rm -f ../organizations/fabric-ca/ordererCne/tls-cert.pem
+        # sudo rm -f ../organizations/fabric-ca/ordererCne/IssuerPublicKey
+        # sudo rm -f ../organizations/fabric-ca/ordererCne/IssuerRevocationPublicKey
+        # sudo rm -f ../organizations/fabric-ca/ordererCne/fabric-ca-server.db
+        # sudo rm -f ../organizations/fabric-ca/ordererCne/ca-cert.pem
+        # sudo rm -f ../organizations/fabric-ca/ordererCne/tls-cert.pem
 
 
         # MOE
+        sudo find ../organizations/fabric-ca/ordererMoe -type f ! -name 'fabric-ca-server-config.yaml' -print0 | sudo xargs -0 rm -f 
         sudo rm -rf ../organizations/fabric-ca/ordererMoe/msp
-        sudo rm -f ../organizations/fabric-ca/ordererMoe/IssuerPublicKey
-        sudo rm -f ../organizations/fabric-ca/ordererMoe/IssuerRevocationPublicKey
-        sudo rm -f ../organizations/fabric-ca/ordererMoe/fabric-ca-server.db
-        sudo rm -f ../organizations/fabric-ca/ordererMoe/ca-cert.pem
-        sudo rm -f ../organizations/fabric-ca/ordererMoe/tls-cert.pem
+        # sudo rm -f ../organizations/fabric-ca/ordererMoe/IssuerPublicKey
+        # sudo rm -f ../organizations/fabric-ca/ordererMoe/IssuerRevocationPublicKey
+        # sudo rm -f ../organizations/fabric-ca/ordererMoe/fabric-ca-server.db
+        # sudo rm -f ../organizations/fabric-ca/ordererMoe/ca-cert.pem
+        # sudo rm -f ../organizations/fabric-ca/ordererMoe/tls-cert.pem
 
+        sudo find ../organizations/fabric-ca/moe -type f ! -name 'fabric-ca-server-config.yaml' -print0 | sudo xargs -0 rm -f 
         sudo rm -rf ../organizations/fabric-ca/moe/msp
-        sudo rm -f ../organizations/fabric-ca/moe/IssuerPublicKey
-        sudo rm -f ../organizations/fabric-ca/moe/IssuerRevocationPublicKey
-        sudo rm -f ../organizations/fabric-ca/moe/fabric-ca-server.db
-        sudo rm -f ../organizations/fabric-ca/moe/ca-cert.pem
-        sudo rm -f ../organizations/fabric-ca/moe/tls-cert.pem
+        # sudo rm -f ../organizations/fabric-ca/moe/IssuerPublicKey
+        # sudo rm -f ../organizations/fabric-ca/moe/IssuerRevocationPublicKey
+        # sudo rm -f ../organizations/fabric-ca/moe/fabric-ca-server.db
+        # sudo rm -f ../organizations/fabric-ca/moe/ca-cert.pem
+        # sudo rm -f ../organizations/fabric-ca/moe/tls-cert.pem
 
         # sudo rm -rf ../organizations/fabric-ca/mediosdecomunicacion/msp
         # sudo rm -f ../organizations/fabric-ca/mediosdecomunicacion/IssuerPublicKey
@@ -85,7 +71,7 @@ case "$ACTION" in
         # sudo rm -f ../organizations/fabric-ca/orgpolitica2/IssuerPublicKey
         # sudo rm -f ../organizations/fabric-ca/orgpolitica2/IssuerRevocationPublicKey
         # sudo rm -f ../organizations/fabric-ca/orgpolitica2/fabric-ca-server.db
-        # ;;
+        ;;
     *)
         echo "Parámetro no válido. Use: $0 {up|down}"
         exit 1
