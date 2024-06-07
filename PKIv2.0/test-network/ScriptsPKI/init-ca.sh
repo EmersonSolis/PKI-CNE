@@ -71,6 +71,10 @@ case "$ACTION" in
         # sudo rm -f ../organizations/fabric-ca/orgpolitica2/IssuerPublicKey
         # sudo rm -f ../organizations/fabric-ca/orgpolitica2/IssuerRevocationPublicKey
         # sudo rm -f ../organizations/fabric-ca/orgpolitica2/fabric-ca-server.db
+
+        # Borrar material criptografico
+        sudo rm -rf ../organizations/peerOrganizations
+        sudo rm -rf ../organizations/ordererOrganizations
         ;;
     *)
         echo "Parámetro no válido. Use: $0 {up|down}"

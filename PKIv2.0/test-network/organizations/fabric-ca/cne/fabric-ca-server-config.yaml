@@ -23,7 +23,7 @@ tls:
 # The CA section contains information related to the Certificate Authority
 ca:
   # Name of this CA
-  name: ca.cne.com
+  name: ca_cne
   # Key file (is only used to import a private key into BCCSP)
   keyfile: # /etc/hyperledger/fabric-ca-server-config/ca.cne.com-key.pem
   # Certificate file (default: ca-cert.pem)

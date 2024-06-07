@@ -11,7 +11,7 @@ networks:
 
 services:
 # ----------------------------------------------------------
-#                 Entidad Certificadora TLS(CA TLS)
+#                 Entidad Certificadora CA
 # ----------------------------------------------------------
   ca_cne:
     image: hyperledger/fabric-ca:latest
@@ -49,7 +49,7 @@ services:
       - "18054:18054"
     volumes:
       - ../organizations/fabric-ca/moe:/etc/hyperledger/fabric-ca-server
-    container_name: ca-tls-moe
+    container_name: ca_moe
     networks:
       - test
 
@@ -59,10 +59,10 @@ services:
       service: hyperledger-fabric
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca-orderer
+      - FABRIC_CA_SERVER_CA_NAME=ca-cne-orderer
       - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_PORT=9054
-      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
+      - FABRIC_CA_SERVER_PORT=7055
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:17055
     ports:
       - "7055:7055"
       - "17055:17055"
@@ -79,10 +79,10 @@ services:
       service: hyperledger-fabric
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca-orderer
+      - FABRIC_CA_SERVER_CA_NAME=ca-moe-orderer
       - FABRIC_CA_SERVER_TLS_ENABLED=true
-      - FABRIC_CA_SERVER_PORT=9054
-      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:19054
+      - FABRIC_CA_SERVER_PORT=8055
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:18055
     ports:
       - "8055:8055"
       - "18055:18055"
