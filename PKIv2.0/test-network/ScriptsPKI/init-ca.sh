@@ -9,6 +9,17 @@ case "$ACTION" in
         echo "Iniciado docker compose-ca..."
         echo "----------------------------------------------------------"
         sudo docker-compose -f ../compose/compose-ca.yaml up -d
+
+        # Creando material criptográfico
+        echo "----------------------------------------------------------"
+        echo "Iniciado CA"
+        echo "----------------------------------------------------------"
+        cd ../organizations/
+        ./enroll-ca.sh cne
+        ./enroll-ca.sh cneOrd
+        ./enroll-ca.sh moe
+        ./enroll-ca.sh moeOrd
+        cd ../ScriptsPKI/
         ;;
     down)
         # Detener Docker de las CA
@@ -19,58 +30,26 @@ case "$ACTION" in
 
         # Eliminar archivos fabric-ca
         echo "----------------------------------------------------------"
-        echo "Eliminando archivos fabric-ca"
+        echo "Eliminando archivos fabric-ca y matereria criptografico"
         echo "----------------------------------------------------------"
   
         # CNE
         sudo find ../organizations/fabric-ca/cne -type f ! -name 'fabric-ca-server-config.yaml' -print0 | sudo xargs -0 rm -f
         sudo rm -rf ../organizations/fabric-ca/cne/msp
-        # sudo rm -f ../organizations/fabric-ca/cne/IssuerPublicKey
-        # sudo rm -f ../organizations/fabric-ca/cne/IssuerRevocationPublicKey
-        # sudo rm -f ../organizations/fabric-ca/cne/fabric-ca-server.db
-        # sudo rm -f ../organizations/fabric-ca/cne/ca-cert.pem
-        # sudo rm -f ../organizations/fabric-ca/cne/tls-cert.pem
-        
+      
         sudo find ../organizations/fabric-ca/ordererCne -type f ! -name 'fabric-ca-server-config.yaml' -print0 | sudo xargs -0 rm -f
         sudo rm -rf ../organizations/fabric-ca/ordererCne/msp
-        # sudo rm -f ../organizations/fabric-ca/ordererCne/IssuerPublicKey
-        # sudo rm -f ../organizations/fabric-ca/ordererCne/IssuerRevocationPublicKey
-        # sudo rm -f ../organizations/fabric-ca/ordererCne/fabric-ca-server.db
-        # sudo rm -f ../organizations/fabric-ca/ordererCne/ca-cert.pem
-        # sudo rm -f ../organizations/fabric-ca/ordererCne/tls-cert.pem
+
 
 
         # MOE
         sudo find ../organizations/fabric-ca/ordererMoe -type f ! -name 'fabric-ca-server-config.yaml' -print0 | sudo xargs -0 rm -f 
         sudo rm -rf ../organizations/fabric-ca/ordererMoe/msp
-        # sudo rm -f ../organizations/fabric-ca/ordererMoe/IssuerPublicKey
-        # sudo rm -f ../organizations/fabric-ca/ordererMoe/IssuerRevocationPublicKey
-        # sudo rm -f ../organizations/fabric-ca/ordererMoe/fabric-ca-server.db
-        # sudo rm -f ../organizations/fabric-ca/ordererMoe/ca-cert.pem
-        # sudo rm -f ../organizations/fabric-ca/ordererMoe/tls-cert.pem
 
         sudo find ../organizations/fabric-ca/moe -type f ! -name 'fabric-ca-server-config.yaml' -print0 | sudo xargs -0 rm -f 
         sudo rm -rf ../organizations/fabric-ca/moe/msp
-        # sudo rm -f ../organizations/fabric-ca/moe/IssuerPublicKey
-        # sudo rm -f ../organizations/fabric-ca/moe/IssuerRevocationPublicKey
-        # sudo rm -f ../organizations/fabric-ca/moe/fabric-ca-server.db
-        # sudo rm -f ../organizations/fabric-ca/moe/ca-cert.pem
-        # sudo rm -f ../organizations/fabric-ca/moe/tls-cert.pem
 
-        # sudo rm -rf ../organizations/fabric-ca/mediosdecomunicacion/msp
-        # sudo rm -f ../organizations/fabric-ca/mediosdecomunicacion/IssuerPublicKey
-        # sudo rm -f ../organizations/fabric-ca/mediosdecomunicacion/IssuerRevocationPublicKey
-        # sudo rm -f ../organizations/fabric-ca/mediosdecomunicacion/fabric-ca-server.db
 
-        # sudo rm -rf ../organizations/fabric-ca/orgpolitica1/msp
-        # sudo rm -f ../organizations/fabric-ca/orgpolitica1/IssuerPublicKey
-        # sudo rm -f ../organizations/fabric-ca/orgpolitica1/IssuerRevocationPublicKey
-        # sudo rm -f ../organizations/fabric-ca/orgpolitica1/fabric-ca-server.db
-
-        # sudo rm -rf ../organizations/fabric-ca/orgpolitica2/msp
-        # sudo rm -f ../organizations/fabric-ca/orgpolitica2/IssuerPublicKey
-        # sudo rm -f ../organizations/fabric-ca/orgpolitica2/IssuerRevocationPublicKey
-        # sudo rm -f ../organizations/fabric-ca/orgpolitica2/fabric-ca-server.db
 
         # Borrar material criptografico
         sudo rm -rf ../organizations/peerOrganizations
