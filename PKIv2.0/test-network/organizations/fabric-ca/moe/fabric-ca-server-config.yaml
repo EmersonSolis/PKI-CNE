@@ -121,13 +121,13 @@ signing:
   default:
     usage:
       - digital signature
-    expiry: 8760h
+    expiry: 730h
   profiles:
     ca:
       usage:
         - cert sign
         - crl sign
-      expiry: 43800h
+      expiry: 730h
       caconstraint:
         isca: true
         maxpathlen: 0
@@ -138,22 +138,23 @@ signing:
         - server auth
         - client auth
         - key agreement
-      expiry: 8760h
+      expiry: 730h
+
 
 # Certificate Signing Request (CSR) section
 csr:
   cn: ca.moe.com
   names:
-    - C: US
-      ST: "New York"
-      L: "New York"
+    - C: EC
+      ST: "Pichincha"
+      L: "Quito"
       O: moe.com
       OU:
   hosts:
     - localhost
     - ca.moe.com
   ca:
-    expiry: 131400h
+    expiry: 14000h
     pathlength: 1
 
 # BCCSP section
