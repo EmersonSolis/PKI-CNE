@@ -163,50 +163,6 @@ Organizations:
                 Type: Signature
                 Rule: "OR('OrdererMOEMSP.admin')"
 
-    # - &OrgPolitica1
-    #     Name: OrgPolitica1MSP
-    #     ID: OrgPolitica1MSP
-    #     MSPDir: crypto-config/peerOrganizations/orgpolitica1.com/msp
-    #     Policies:
-    #         Readers:
-    #             Type: Signature
-    #             Rule: "OR('OrgPolitica1MSP.admin', 'OrgPolitica1MSP.peer', 'OrgPolitica1MSP.client')"
-    #         Writers:
-    #             Type: Signature
-    #             Rule: "OR('OrgPolitica1MSP.admin', 'OrgPolitica1MSP.client')"
-    #         Admins:
-    #             Type: Signature
-    #             Rule: "OR('OrgPolitica1MSP.admin')"
-
-    # - &OrgPolitica2
-    #     Name: OrgPolitica2MSP
-    #     ID: OrgPolitica2MSP
-    #     MSPDir: crypto-config/peerOrganizations/orgpolitica2.com/msp
-    #     Policies:
-    #         Readers:
-    #             Type: Signature
-    #             Rule: "OR('OrgPolitica2MSP.admin', 'OrgPolitica2MSP.peer', 'OrgPolitica2MSP.client')"
-    #         Writers:
-    #             Type: Signature
-    #             Rule: "OR('OrgPolitica2MSP.admin', 'OrgPolitica2MSP.client')"
-    #         Admins:
-    #             Type: Signature
-    #             Rule: "OR('OrgPolitica2MSP.admin')"
-
-    # - &MediosDeComunicacion
-    #     Name: MediosDeComunicacionMSP
-    #     ID: MediosDeComunicacionMSP
-    #     MSPDir: crypto-config/peerOrganizations/mediosdecomunicacion.com/msp
-    #     Policies:
-    #         Readers:
-    #             Type: Signature
-    #             Rule: "OR('MediosDeComunicacionMSP.admin', 'MediosDeComunicacionMSP.peer', 'MediosDeComunicacionMSP.client')"
-    #         Writers:
-    #             Type: Signature
-    #             Rule: "OR('MediosDeComunicacionMSP.admin', 'MediosDeComunicacionMSP.client')"
-    #         Admins:
-    #             Type: Signature
-    #             Rule: "OR('MediosDeComunicacionMSP.admin')"
 
 ################################################################################
 #
@@ -320,9 +276,6 @@ Orderer: &OrdererDefaults
     Addresses:
         - orderer.cne.com:7050
         - orderer.moe.com:8050
-        # - orderer.orgpolitica1.com:9050
-        # - orderer.orgpolitica2.com:10050
-        # - orderer.mediosdecomunicacion.com:11050
 
     EtcdRaft:
         Consenters:
@@ -334,24 +287,6 @@ Orderer: &OrdererDefaults
           Port: 8050
           ClientTLSCert: ../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/tls/server.crt
           ServerTLSCert: ../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/tls/server.crt
-        # - Host: orderer.orgpolitica1.com
-        #   Port: 9050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/orgpolitica1.com/orderers/orderer.orgpolitica1.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/orgpolitica1.com/orderers/orderer.orgpolitica1.com/tls/server.crt
-        # - Host: orderer.orgpolitica2.com
-        #   Port: 10050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/orgpolitica2.com/orderers/orderer.orgpolitica2.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/orgpolitica2.com/orderers/orderer.orgpolitica2.com/tls/server.crt
-        # - Host: orderer.mediosdecomunicacion.com
-        #   Port: 11050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/mediosdecomunicacion.com/orderers/orderer.mediosdecomunicacion.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/mediosdecomunicacion.com/orderers/orderer.mediosdecomunicacion.com/tls/server.crt
-
-
-        # - Host: orderer.example.com
-        #   Port: 7050
-        #   ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
-        #   ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
@@ -364,7 +299,7 @@ Orderer: &OrdererDefaults
 
         # Absolute Max Bytes: The absolute maximum number of bytes allowed for
         # the serialized messages in a batch.
-        AbsoluteMaxBytes: 99 MB
+        AbsoluteMaxBytes: 10 MB
 
         # Preferred Max Bytes: The preferred maximum number of bytes allowed for
         # the serialized messages in a batch. A message larger than the preferred
@@ -443,27 +378,18 @@ Profiles:
             Organizations:
                 - *OrdererCNE
                 - *OrdererMOE
-                # - *OrgPolitica1
-                # - *OrgPolitica2
-                # - *MediosDeComunicacion
             Capabilities: *OrdererCapabilities
         Consortiums:
             CneConsortium:
                 Organizations:
                     - *CNE
                     - *MOE
-                    # - *OrgPolitica1
-                    # - *OrgPolitica2
-                    # - *MediosDeComunicacion
-
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *CNE
                 - *MOE
-                # - *OrgPolitica1
-                # - *OrgPolitica2
-                # - *MediosDeComunicacion
+
             Capabilities: *ApplicationCapabilities
     
     TwoOrgsChannel:
@@ -474,16 +400,13 @@ Profiles:
             Organizations:
                 - *CNE
                 - *MOE
-                # - *OrgPolitica1
-                # - *OrgPolitica2
-                # - *MediosDeComunicacion
             Policies:
                 Endorsement:
-                    Type: ImplicitMeta
-                    Rule: "MAJORITY Endorsement"
+                    Type: Signature
+                    Rule: "AND('CNEMSP.peer', 'MOEMSP.peer')"
                 LifecycleEndorsement:
-                    Type: ImplicitMeta
-                    Rule: "MAJORITY Endorsement"
+                    Type: Signature
+                    Rule: "AND('CNEMSP.peer', 'MOEMSP.peer')"
                 Readers:
                     Type: ImplicitMeta
                     Rule: "ANY Readers"
