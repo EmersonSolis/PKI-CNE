@@ -76,28 +76,6 @@ Organizations:
     #     # of the fabric.git development environment
     #     Name: Org2MSP
 
-    #     # ID to load the MSP definition as
-    #     ID: Org2MSP
-
-    #     MSPDir: ../organizations/peerOrganizations/org2.example.com/msp
-
-    #     # Policies defines the set of policies at this level of the config tree
-    #     # For organization policies, their canonical path is usually
-    #     #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
-    #     Policies:
-    #         Readers:
-    #             Type: Signature
-    #             Rule: "OR('Org2MSP.admin', 'Org2MSP.peer', 'Org2MSP.client')"
-    #         Writers:
-    #             Type: Signature
-    #             Rule: "OR('Org2MSP.admin', 'Org2MSP.client')"
-    #         Admins:
-    #             Type: Signature
-    #             Rule: "OR('Org2MSP.admin')"
-    #         Endorsement:
-    #             Type: Signature
-    #             Rule: "OR('Org2MSP.peer')"
-
     - &CNE
         Name: CNEMSP
         ID: CNEMSP
@@ -147,6 +125,8 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('OrdererCNEMSP.admin')"
+            OrdererEndpoints:
+                - orderer.cne.com:7050
 
     - &OrdererMOE
         Name: OrdererMOEOrg
@@ -162,6 +142,8 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('OrdererMOEMSP.admin')"
+            OrdererEndpoints:
+                - orderer.moe.com:8050
 
 
 ################################################################################
@@ -355,9 +337,6 @@ Channel: &ChannelDefaults
             Type: ImplicitMeta
             Rule: "MAJORITY Admins"
 
-    # Capabilities describes the channel level capabilities, see the
-    # dedicated Capabilities section elsewhere in this file for a full
-    # description
     Capabilities:
         <<: *ChannelCapabilities
 
