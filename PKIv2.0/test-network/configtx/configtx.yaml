@@ -125,8 +125,8 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('OrdererCNEMSP.admin')"
-            OrdererEndpoints:
-                - orderer.cne.com:7050
+            # OrdererEndpoints:
+            #     - orderer.cne.com:7050
 
     - &OrdererMOE
         Name: OrdererMOEOrg
@@ -142,8 +142,8 @@ Organizations:
             Admins:
                 Type: Signature
                 Rule: "OR('OrdererMOEMSP.admin')"
-            OrdererEndpoints:
-                - orderer.moe.com:8050
+            # OrdererEndpoints:
+            #     - orderer.moe.com:8050
 
 
 ################################################################################

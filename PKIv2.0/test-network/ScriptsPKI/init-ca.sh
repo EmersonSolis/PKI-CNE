@@ -30,7 +30,7 @@ case "$ACTION" in
 
         # Eliminar archivos fabric-ca
         echo "----------------------------------------------------------"
-        echo "Eliminando archivos fabric-ca y matereria criptografico"
+        echo "Eliminando archivos fabric-ca y material criptografico"
         echo "----------------------------------------------------------"
   
         # CNE
