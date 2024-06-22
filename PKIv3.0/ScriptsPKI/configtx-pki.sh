@@ -12,9 +12,9 @@ case "$ACTION" in
         CHANNEL_ARTIFACTS_DIR=${FABRIC_CFG_PATH}/channel-artifacts
 
         # Genesis Block
-        configtxgen -profile TwoOrgsApplicationGenesis -outputBlock $GENESIS_BLOCK_DIR/genesis.block -channelID system-channel
+        configtxgen -profile TwoOrgsGenesis -channelID cne-sys-channel -outputBlock $GENESIS_BLOCK_DIR/genesis.block 
         # Channel Tx 
-        configtxgen -profile TwoOrgsChannel -outputCreateChannelTx $CHANNEL_ARTIFACTS_DIR/channel.tx -channelID mychannel
+        configtxgen -profile TwoOrgsChannel -channelID cne-channel -outputCreateChannelTx $CHANNEL_ARTIFACTS_DIR/channel.tx 
         ;;
     clean)
         echo "----------------------------------------------------------"

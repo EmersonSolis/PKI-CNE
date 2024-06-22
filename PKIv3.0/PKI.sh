@@ -25,6 +25,15 @@ case "$ACTION" in
         cd ..
         ;;
     down)
+
+        sudo docker stop $(docker ps -a -q)  ; 
+        sudo docker rm -f $(docker ps -aq) ; 
+        sudo docker system prune -a; 
+        sudo docker volume prune ; 
+        # sudo docker ps -a ; 
+        # sudo docker images -a ; 
+        # sudo docker volume ls ;
+
         cd ScriptsPKI/;
 
         ./stop-docker.sh;

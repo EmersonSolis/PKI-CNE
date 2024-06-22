@@ -28,9 +28,9 @@ ORDERER_CA=$(realpath ${PWD}/../organizations/ordererOrganizations/cne.com/order
 
 # Create the channel
 echo "Creating the channel...";
-peer channel create -o orderer.cne.com:7050 -c mychannel -f $CHANNEL_ARTIFACTS_DIR/channel.tx --outputBlock $CHANNEL_ARTIFACTS_DIR/mychannel.block --tls --cafile $ORDERER_CA;
+peer channel create -o orderer.cne.com:7050 -c cne-channel -f $CHANNEL_ARTIFACTS_DIR/channel.tx --outputBlock $CHANNEL_ARTIFACTS_DIR/cne-channel.block --tls --cafile $ORDERER_CA;
 
 # Join the CNE peer to the channel
 export FABRIC_CFG_PATH=$(realpath ${PWD}/../compose/docker/peercfg/CNE);
 echo "Joining CNE to the channel...";
-peer channel join -b $CHANNEL_ARTIFACTS_DIR/mychannel.block --tls --cafile $CORE_PEER_TLS_ROOTCERT_FILE;
+peer channel join -b $CHANNEL_ARTIFACTS_DIR/cne-channel.block --tls --cafile $CORE_PEER_TLS_ROOTCERT_FILE;
