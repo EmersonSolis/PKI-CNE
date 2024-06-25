@@ -14,7 +14,7 @@ case "$ACTION" in
         # Genesis Block
         configtxgen -profile TwoOrgsGenesis -channelID cne-sys-channel -outputBlock $GENESIS_BLOCK_DIR/genesis.block 
         # Channel Tx 
-        configtxgen -profile TwoOrgsChannel -channelID cne-channel -outputCreateChannelTx $CHANNEL_ARTIFACTS_DIR/channel.tx 
+        # configtxgen -profile TwoOrgsChannel -channelID cne-channel -outputCreateChannelTx $CHANNEL_ARTIFACTS_DIR/channel.tx 
         ;;
     clean)
         echo "----------------------------------------------------------"
