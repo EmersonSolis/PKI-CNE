@@ -17,6 +17,7 @@ networks:
 
 services:
 
+  # ------------------- PEERS ---------------------------
   peer0.cne.com:
     container_name: peer0.cne.com
     image: hyperledger/fabric-peer:2.4
@@ -73,110 +74,41 @@ services:
     networks:
       - test
 
-  # peer0.orgpolitica1.com:
-  #   container_name: peer0.orgpolitica1.com
-  #   image: hyperledger/fabric-peer:2.4
-  #   environment:
-  #     - CORE_PEER_ID=peer0.orgpolitica1.com
-  #     - CORE_PEER_ADDRESS=peer0.orgpolitica1.com:9051
-  #     - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
-  #     - CORE_PEER_CHAINCODEADDRESS=peer0.orgpolitica1.com:9052
-  #     - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
-  #     - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.orgpolitica1.com:9051
-  #     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.orgpolitica1.com:9051
-  #     - CORE_PEER_LOCALMSPID=OrgPolitica1MSP
-  #     - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
-  #     - CORE_PEER_TLS_ENABLED=true
-  #     - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
-  #     - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
-  #     - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-  #   volumes:
-  #     - ../organizations/peerOrganizations/orgpolitica1.com/peers/peer0.orgpolitica1.com/msp:/etc/hyperledger/fabric/msp
-  #     - ../organizations/peerOrganizations/orgpolitica1.com/peers/peer0.orgpolitica1.com/tls:/etc/hyperledger/fabric/tls
-  #   ports:
-  #     - 9051:9051
-  #     - 9052:9052
-  #   # depends_on:
-  #   #   - couchdb_orgpolitica1
-  #   networks:
-  #     - test
 
-  # peer0.orgpolitica2.com:
-  #   container_name: peer0.orgpolitica2.com
-  #   image: hyperledger/fabric-peer:2.4
-  #   environment:
-  #     - CORE_PEER_ID=peer0.orgpolitica2.com
-  #     - CORE_PEER_ADDRESS=peer0.orgpolitica2.com:10051
-  #     - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
-  #     - CORE_PEER_CHAINCODEADDRESS=peer0.orgpolitica2.com:10052
-  #     - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052
-  #     - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.orgpolitica2.com:10051
-  #     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.orgpolitica2.com:10051
-  #     - CORE_PEER_LOCALMSPID=OrgPolitica2MSP
-  #     - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
-  #     - CORE_PEER_TLS_ENABLED=true
-  #     - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
-  #     - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
-  #     - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-  #   volumes:
-  #     - ../organizations/peerOrganizations/orgpolitica2.com/peers/peer0.orgpolitica2.com/msp:/etc/hyperledger/fabric/msp
-  #     - ../organizations/peerOrganizations/orgpolitica2.com/peers/peer0.orgpolitica2.com/tls:/etc/hyperledger/fabric/tls
-  #   ports:
-  #     - 10051:10051
-  #     - 10052:10052
-  #   # depends_on:
-  #   #   - couchdb_orgpolitica2
-  #   networks:
-  #     - test
-
-  # peer0.mediosdecomunicacion.com:
-  #   container_name: peer0.mediosdecomunicacion.com
-  #   image: hyperledger/fabric-peer:2.4
-  #   environment:
-  #     - CORE_PEER_ID=peer0.mediosdecomunicacion.com
-  #     - CORE_PEER_ADDRESS=peer0.mediosdecomunicacion.com:11051
-  #     - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
-  #     - CORE_PEER_CHAINCODEADDRESS=peer0.mediosdecomunicacion.com:11052
-  #     - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
-  #     - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.mediosdecomunicacion.com:11051
-  #     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.mediosdecomunicacion.com:11051
-  #     - CORE_PEER_LOCALMSPID=MediosDeComunicacionMSP
-  #     - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
-  #     - CORE_PEER_TLS_ENABLED=true
-  #     - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
-  #     - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
-  #     - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
-  #   volumes:
-  #     - ../organizations/peerOrganizations/mediosdecomunicacion.com/peers/peer0.mediosdecomunicacion.com/msp:/etc/hyperledger/fabric/msp
-  #     - ../organizations/peerOrganizations/mediosdecomunicacion.com/peers/peer0.mediosdecomunicacion.com/tls:/etc/hyperledger/fabric/tls
-  #   ports:
-  #     - 11051:11051
-  #     - 11052:11052
-  #   # depends_on:
-  #   #   - couchdb_mediosdecomunicacion
-  #   networks:
-  #     - test
-
+  # ------------------- ORDERERS ---------------------------
   orderer.cne.com:
     container_name: orderer.cne.com
     image: hyperledger/fabric-orderer:2.4
     environment:
       - FABRIC_LOGGING_SPEC=INFO
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-      - ORDERER_GENERAL_GENESISMETHOD=file
-      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-      - ORDERER_GENERAL_LOCALMSPID=CNEMSP
+      - ORDERER_GENERAL_LISTENPORT=7050
+      - ORDERER_GENERAL_LOCALMSPID=OrdererCNEMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # Enable TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_GENERAL_BOOTSTRAPMETHOD=none
+      - ORDERER_CHANNELPARTICIPATION_ENABLED=true
+      - ORDERER_ADMIN_TLS_ENABLED=true
+      - ORDERER_ADMIN_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_ADMIN_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:7056
+
     volumes:
-      - ../configtx/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      #- ../configtx/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
       - ../organizations/ordererOrganizations/cne.com/orderers/orderer.cne.com/msp:/var/hyperledger/orderer/msp
       - ../organizations/ordererOrganizations/cne.com/orderers/orderer.cne.com/tls:/var/hyperledger/orderer/tls
     ports:
       - 7050:7050
+      - 7056:7056
     networks:
       - test
       
@@ -186,91 +118,37 @@ services:
     environment:
       - FABRIC_LOGGING_SPEC=INFO
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-      - ORDERER_GENERAL_GENESISMETHOD=file
-      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-      - ORDERER_GENERAL_LOCALMSPID=MOEMSP
+      - ORDERER_GENERAL_LISTENPORT=8050
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMOEMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # Enable TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_GENERAL_BOOTSTRAPMETHOD=none
+      - ORDERER_CHANNELPARTICIPATION_ENABLED=true
+      - ORDERER_ADMIN_TLS_ENABLED=true
+      - ORDERER_ADMIN_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_ADMIN_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_ADMIN_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_ADMIN_LISTENADDRESS=0.0.0.0:8056  
+
+
     volumes:
-      - ../configtx/system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
       - ../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/msp:/var/hyperledger/orderer/msp
       - ../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/tls:/var/hyperledger/orderer/tls
     ports:
       - 8050:8050
+      - 8056:8056  
     networks:
       - test
 
-  # orderer.orgpolitica1.com:
-  #   container_name: orderer.orgpolitica1.com
-  #   image: hyperledger/fabric-orderer:2.4
-  #   environment:
-  #     - FABRIC_LOGGING_SPEC=INFO
-  #     - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-  #     - ORDERER_GENERAL_GENESISMETHOD=file
-  #     - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-  #     - ORDERER_GENERAL_LOCALMSPID=OrgPolitica1MSP
-  #     - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-  #     - ORDERER_GENERAL_TLS_ENABLED=true
-  #     - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-  #     - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-  #     - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-  #   volumes:
-  #     - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-  #     - ../organizations/ordererOrganizations/orgpolitica1.com/orderers/orderer.orgpolitica1.com/msp:/var/hyperledger/orderer/msp
-  #     - ../organizations/ordererOrganizations/orgpolitica1.com/orderers/orderer.orgpolitica1.com/tls/:/var/hyperledger/orderer/tls
-  #   ports:
-  #     - 9050:7050
-  #   networks:
-  #     - test
-
-  # orderer.orgpolitica2.com:
-  #   container_name: orderer.orgpolitica2.com
-  #   image: hyperledger/fabric-orderer:2.4
-  #   environment:
-  #     - FABRIC_LOGGING_SPEC=INFO
-  #     - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-  #     - ORDERER_GENERAL_GENESISMETHOD=file
-  #     - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-  #     - ORDERER_GENERAL_LOCALMSPID=OrgPolitica2MSP
-  #     - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-  #     - ORDERER_GENERAL_TLS_ENABLED=true
-  #     - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-  #     - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-  #     - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-  #   volumes:
-  #     - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-  #     - ../organizations/ordererOrganizations/orgpolitica2.com/orderers/orderer.orgpolitica2.com/msp:/var/hyperledger/orderer/msp
-  #     - ../organizations/ordererOrganizations/orgpolitica2.com/orderers/orderer.orgpolitica2.com/tls/:/var/hyperledger/orderer/tls
-  #   ports:
-  #     - 10050:7050
-  #   networks:
-  #     - test
-
-  # orderer.mediosdecomunicacion.com:
-  #   container_name: orderer.mediosdecomunicacion.com
-  #   image: hyperledger/fabric-orderer:2.4
-  #   environment:
-  #     - FABRIC_LOGGING_SPEC=INFO
-  #     - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-  #     - ORDERER_GENERAL_GENESISMETHOD=file
-  #     - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-  #     - ORDERER_GENERAL_LOCALMSPID=MediosDeComunicacionMSP
-  #     - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-  #     - ORDERER_GENERAL_TLS_ENABLED=true
-  #     - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-  #     - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-  #     - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-  #   volumes:
-  #     - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-  #     - ../organizations/ordererOrganizations/mediosdecomunicacion.com/orderers/orderer.mediosdecomunicacion.com/msp:/var/hyperledger/orderer/msp
-  #     - ../organizations/ordererOrganizations/mediosdecomunicacion.com/orderers/orderer.mediosdecomunicacion.com/tls/:/var/hyperledger/orderer/tls
-  #   ports:
-  #     - 11050:7050
-  #   networks:
-  #     - test
+  
 
 # services:
 
