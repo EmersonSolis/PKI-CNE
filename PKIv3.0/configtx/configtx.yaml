@@ -320,27 +320,27 @@ Profiles:
 
             Capabilities: *ApplicationCapabilities
     
-    TwoOrgsChannel:
-        <<: *ChannelDefaults
-        Consortium: CneConsortium
-        Application:
-            <<: *ApplicationDefaults
-            Organizations:
-                - *CNE
-                - *MOE
-            Policies:
-                Endorsement:
-                    Type: Signature
-                    Rule: "AND('CNEMSP.peer', 'MOEMSP.peer')"
-                LifecycleEndorsement:
-                    Type: Signature
-                    Rule: "AND('CNEMSP.peer', 'MOEMSP.peer')"
-                Readers:
-                    Type: ImplicitMeta
-                    Rule: "ANY Readers"
-                Writers:
-                    Type: ImplicitMeta
-                    Rule: "ANY Writers"
-                Admins:
-                    Type: ImplicitMeta
-                    Rule: "MAJORITY Admins"
+    # TwoOrgsChannel:
+    #     <<: *ChannelDefaults
+    #     Consortium: CneConsortium
+    #     Application:
+    #         <<: *ApplicationDefaults
+    #         Organizations:
+    #             - *CNE
+    #             - *MOE
+    #         Policies:
+    #             Endorsement:
+    #                 Type: Signature
+    #                 Rule: "AND('CNEMSP.peer', 'MOEMSP.peer')"
+    #             LifecycleEndorsement:
+    #                 Type: Signature
+    #                 Rule: "AND('CNEMSP.peer', 'MOEMSP.peer')"
+    #             Readers:
+    #                 Type: ImplicitMeta
+    #                 Rule: "ANY Readers"
+    #             Writers:
+    #                 Type: ImplicitMeta
+    #                 Rule: "ANY Writers"
+    #             Admins:
+    #                 Type: ImplicitMeta
+    #                 Rule: "MAJORITY Admins"

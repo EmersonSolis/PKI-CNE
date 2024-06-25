@@ -48,7 +48,7 @@ export FABRIC_CFG_PATH=$(realpath ${PWD}/../compose/docker/peercfg/MOE);
 ORDERER_CA=$(realpath ${PWD}/../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/tls/ca.crt);
 # Define peer environment variables for MOE
 export CORE_PEER_TLS_ENABLED=true;
-export CORE_PEER_LOCALMSPID="CNEMSP";
+export CORE_PEER_LOCALMSPID="MOEMSP";
 export CORE_PEER_TLS_ROOTCERT_FILE=$(realpath ${PWD}/../organizations/peerOrganizations/moe.com/peers/peer0.moe.com/tls/ca.crt);
 export CORE_PEER_MSPCONFIGPATH=$(realpath ${PWD}/../organizations/peerOrganizations/moe.com/users/Admin@moe.com/msp);
 export ORDERER_ADMIN_TLS_SIGN_CERT=${PWD}/../organizations/ordererOrganizations/moe.com/orderers/orderer.moe.com/tls/server.crt;
