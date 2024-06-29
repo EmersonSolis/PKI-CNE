@@ -23,13 +23,6 @@ case "$ACTION" in
         ./joinChannel.sh;
 
         cd ..;
-
-        # ------------ CHAINCODE -----------------------
-        # ./ScriptsPKI/chaincode.sh 
-        
-        # ./ScriptsPKI/chaincode.sh  -ccn basic -ccp ../asset-consortium-cne/chaincode-go -ccl go
-
-
         ;;
     down)
 
@@ -51,6 +44,12 @@ case "$ACTION" in
 
         cd ..
         ;;
+    chaincode)
+    # ------------ CHAINCODE -----------------------
+    # ./ScriptsPKI/chaincode.sh 
+    
+    # ./ScriptsPKI/chaincode.sh  -ccn basic -ccp ../asset-consortium-cne/chaincode-go -ccl go
+    ;;
     *)
         echo "Parámetro no válido. Uso: $0 {up|down}"
         exit 1
