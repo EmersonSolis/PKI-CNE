@@ -26,7 +26,8 @@ case "$ACTION" in
 
         # ------------ CHAINCODE -----------------------
         # ./ScriptsPKI/chaincode.sh 
-        # ./ScriptsPKI/chaincode.sh  -ccn basic -ccp ../asset-consrosium-cne/chaincode-go -ccl go
+        
+        # ./ScriptsPKI/chaincode.sh  -ccn basic -ccp ../asset-consortium-cne/chaincode-go -ccl go
 
 
         ;;

@@ -2,7 +2,6 @@
 
 source ScriptsPKI/utils.sh
 
-
 CHANNEL_NAME=${1:-"cne-sys-channel"}
 CC_NAME=${2}
 CC_SRC_PATH=${3}
@@ -34,15 +33,15 @@ println "- VERBOSE: ${C_GREEN}${VERBOSE}${C_RESET}"
 
 #User has not provided a name
 if [ -z "$CC_NAME" ] || [ "$CC_NAME" = "NA" ]; then
-  fatalln "No chaincode name was provided. Valid call example: ./chaincode.sh  -ccn basic -ccp ../asset-consrosium-cne/chaincode-go -ccl go"
+  fatalln "No chaincode name was provided. Valid call example: ./chaincode.sh  -ccn basic -ccp ../asset-consortium-cne/chaincode-go -ccl go"
 
 # User has not provided a path
 elif [ -z "$CC_SRC_PATH" ] || [ "$CC_SRC_PATH" = "NA" ]; then
-  fatalln "No chaincode path was provided. Valid call example: ./chaincode.sh  -ccn basic -ccp ../asset-consrosium-cne/chaincode-go -ccl go"
+  fatalln "No chaincode path was provided. Valid call example: ./chaincode.sh  -ccn basic -ccp ../asset-consortium-cne/chaincode-go -ccl go"
 
 # User has not provided a language
 elif [ -z "$CC_SRC_LANGUAGE" ] || [ "$CC_SRC_LANGUAGE" = "NA" ]; then
-  fatalln "No chaincode language was provided. Valid call example: ./chaincode.sh  -ccn basic -ccp ../asset-consrosium-cne/chaincode-go -ccl go"
+  fatalln "No chaincode language was provided. Valid call example: ./chaincode.sh  -ccn basic -ccp ../asset-consortium-cne/chaincode-go -ccl go"
 
 ## Make sure that the path to the chaincode exists
 elif [ ! -d "$CC_SRC_PATH" ] && [ ! -f "$CC_SRC_PATH" ]; then
