@@ -1,19 +1,56 @@
 #!/bin/bash
 
-source ScriptsPKI/utils.sh
+source utils.sh
 
-CHANNEL_NAME=${1:-"cne-sys-channel"}
-CC_NAME=${2}
-CC_SRC_PATH=${3}
-CC_SRC_LANGUAGE=${4}
-CC_VERSION=${5:-"1.0"}
-CC_SEQUENCE=${6:-"1"}
-CC_INIT_FCN=${7:-"NA"}
-CC_END_POLICY=${8:-"NA"}
-CC_COLL_CONFIG=${9:-"NA"}
-DELAY=${10:-"3"}
-MAX_RETRY=${11:-"5"}
-VERBOSE=${12:-"false"}
+CHANNEL_NAME="cne-sys-channel"
+CC_NAME=""
+CC_SRC_PATH=""
+CC_SRC_LANGUAGE=""
+CC_VERSION="1.0"
+CC_SEQUENCE="1"
+CC_INIT_FCN="NA"
+CC_END_POLICY="NA"
+CC_COLL_CONFIG="NA"
+DELAY="3"
+MAX_RETRY="5"
+VERBOSE="false"
+
+while [[ $# -ge 1 ]] ; do
+    key="$1"
+    case $key in
+    -ccn )
+        CC_NAME="$2"
+        shift
+        ;; 
+    -ccp )
+        CC_SRC_PATH="$2"
+        shift
+        ;; 
+    -ccl )
+        CC_SRC_LANGUAGE="$2"
+        shift
+        ;;
+    * )
+        errorln "Unknown flag: $key"
+        printHelp
+        exit 1
+        ;;
+    esac
+    shift
+done   
+
+CHANNEL_NAME=${1:-$CHANNEL_NAME}
+CC_NAME=${2:-$CC_NAME}
+CC_SRC_PATH=${3:-$CC_SRC_PATH}
+CC_SRC_LANGUAGE=${4:-$CC_SRC_LANGUAGE}
+CC_VERSION=${5:-$CC_VERSION}
+CC_SEQUENCE=${6:-$CC_SEQUENCE}
+CC_INIT_FCN=${7:-$CC_INIT_FCN}
+CC_END_POLICY=${8:-$CC_END_POLICY}
+CC_COLL_CONFIG=${9:-$CC_COLL_CONFIG}
+DELAY=${10:-$DELAY}
+MAX_RETRY=${11:-$MAX_RETRY}
+VERBOSE=${12:-$VERBOSE}
 
 println "executing chaincode with the following"
 println "- CHANNEL_NAME: ${C_GREEN}${CHANNEL_NAME}${C_RESET}"
