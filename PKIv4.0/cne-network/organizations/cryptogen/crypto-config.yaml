@@ -1,0 +1,66 @@
+OrdererOrgs:
+  - Name: CNE
+    Domain: cne.com
+    Specs:
+      - Hostname: orderer
+
+  - Name: MOE
+    Domain: moe.com
+    Specs:
+      - Hostname: orderer
+
+  - Name: OrgPolitica1
+    Domain: orgpolitica1.com
+    Specs:
+      - Hostname: orderer
+
+  - Name: OrgPolitica2
+    Domain: orgpolitica2.com
+    Specs:
+      - Hostname: orderer
+
+  - Name: MediosDeComunicacion
+    Domain: mediosdecomunicacion.com
+    Specs:
+      - Hostname: orderer
+
+PeerOrgs:
+  - Name: CNE
+    Domain: cne.com
+    # EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: MOE
+    Domain: moe.com
+    # EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: OrgPolitica1
+    Domain: orgpolitica1.com
+    # EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: OrgPolitica2
+    Domain: orgpolitica2.com
+    # EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: MediosDeComunicacion
+    Domain: mediosdecomunicacion.com
+    # EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
