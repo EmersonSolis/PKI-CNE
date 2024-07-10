@@ -35,9 +35,16 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=fabric_test
+
     volumes:
       - ../organizations/peerOrganizations/cne.com/peers/peer0.cne.com/msp:/etc/hyperledger/fabric/msp
       - ../organizations/peerOrganizations/cne.com/peers/peer0.cne.com/tls:/etc/hyperledger/fabric/tls
+      - /docker/peercfg/CNE:/etc/hyperledger/peercfg
+      - ${DOCKER_SOCK}:/host/var/run/docker.sock
     ports:
       - 7051:7051
       - 7052:7052
@@ -63,9 +70,14 @@ services:
       - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      #Generic peer variables
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=fabric_test
     volumes:
       - ../organizations/peerOrganizations/moe.com/peers/peer0.moe.com/msp:/etc/hyperledger/fabric/msp
       - ../organizations/peerOrganizations/moe.com/peers/peer0.moe.com/tls:/etc/hyperledger/fabric/tls
+      - /docker/peercfg/MOE:/etc/hyperledger/peercfg
+      - ${DOCKER_SOCK}:/host/var/run/docker.sock
     ports:
       - 8051:8051
       - 8052:8052

@@ -48,7 +48,7 @@ case "$ACTION" in
     # ------------ CHAINCODE -----------------------
     # ./ScriptsPKI/chaincode.sh 
     
-    # ./ScriptsPKI/chaincode.sh  -ccn basic -ccp ../asset-consortium-cne/chaincode-go -ccl go
+    ./ScriptsPKI/chaincode.sh  -ccn basic -ccp ../asset-consortium-cne/chaincode-go -ccl go
     ;;
     *)
         echo "Parámetro no válido. Uso: $0 {up|down}"

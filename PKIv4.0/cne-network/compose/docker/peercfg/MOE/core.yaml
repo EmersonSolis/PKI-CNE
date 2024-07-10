@@ -8,7 +8,7 @@
 #    Peer section
 #
 ###############################################################################
-peer:
+peer1:
 
     # The peer id provides a name for this peer instance and is used when
     # naming docker resources.

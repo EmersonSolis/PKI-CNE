@@ -8,7 +8,7 @@
 # This is a collection of bash functions used by different scripts
 
 # imports
-# . scripts/utils.sh
+. ScriptsPKI/utils.sh
 
 export CORE_PEER_TLS_ENABLED=true
 # export ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
@@ -27,6 +27,7 @@ setGlobals() {
   fi
   infoln "Using organization ${USING_ORG}"
   if [ $USING_ORG -eq 1 ]; then
+    #export FABRIC_CFG_PATH=${PWD}/compose/docker/peercfg/CNE/;
     export ORDERER_CA=${PWD}/organizations/ordererOrganizations/cne.com/tlsca/tlsca.cne.com-cert.pem
 
     export CORE_PEER_LOCALMSPID="CNEMSP"
@@ -39,6 +40,7 @@ setGlobals() {
     export CORE_PEER_ADDRESS=localhost:7051
 
   elif [ $USING_ORG -eq 2 ]; then
+    #export FABRIC_CFG_PATH=${PWD}/compose/docker/peercfg/MOE/;
     export ORDERER_CA=${PWD}/organizations/ordererOrganizations/moe.com/tlsca/tlsca.moe.com-cert.pem
 
     export CORE_PEER_LOCALMSPID="MOEMSP"
@@ -93,9 +95,9 @@ parsePeerConnectionParameters() {
     else
       USING_ORG="${OVERRIDE_ORG}"
     fi
-    if [ $USING_ORG  -eq 1 ]
+    if [[ $USING_ORG  -eq 1 ]]; then
       PEER="peer0.cne"
-    elif [  $USING_ORG  -eq 2 ]
+    elif [[  $USING_ORG  -eq 2 ]]; then
       PEER="peer0.moe"
     fi
     ## Set peer addresses

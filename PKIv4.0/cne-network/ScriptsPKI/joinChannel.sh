@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Set the configuration path
-export FABRIC_CFG_PATH=$(realpath ${PWD}/../compose/docker/peercfg/CNE);
+export FABRIC_CFG_PATH=$(realpath ${PWD}/../../config/);
+# export FABRIC_CFG_PATH=$(realpath ${PWD}/../compose/docker/peercfg/CNE);
 
 # ls $FABRIC_CFG_PATH
 
@@ -43,7 +44,8 @@ osnadmin channel join --channelID cne-sys-channel --config-block $GENESIS_BLOCK_
 
 
 # Unir a la MOE al canal
-export FABRIC_CFG_PATH=$(realpath ${PWD}/../compose/docker/peercfg/MOE);
+#export FABRIC_CFG_PATH=$(realpath ${PWD}/../compose/docker/peercfg/MOE);
+export FABRIC_CFG_PATH=$(realpath ${PWD}/../../config/);
 # Define the orderer CA certificate 
 ORDERER_CA=$(realpath ${PWD}/../organizations/ordererOrganizations/moe.com/tlsca/tlsca.moe.com-cert.pem);
 # Define peer environment variables for MOE

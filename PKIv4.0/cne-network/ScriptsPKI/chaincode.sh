@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source utils.sh
+source ScriptsPKI/utils.sh
+
+export FABRIC_CFG_PATH=${PWD}/../config/
 
 CHANNEL_NAME="cne-sys-channel"
 CC_NAME=""
@@ -152,12 +154,16 @@ function checkPrereqs() {
 checkPrereqs
 
 ## package the chaincode
+go mod vendor
 packageChaincode
 
 ## Install chaincode on peer0.org1 and peer0.org2
 infoln "Installing chaincode on peer0.cne..."
+#export FABRIC_CFG_PATH=${PWD}/../config/CNE/
 installChaincode 1
 infoln "Install chaincode on peer0.moe..."
+#export FABRIC_CFG_PATH=${PWD}/compose/docker/peercfg/MOE/;
+#export FABRIC_CFG_PATH=${PWD}/../config/MOE/
 installChaincode 2
 
 ## query whether the chaincode is installed
