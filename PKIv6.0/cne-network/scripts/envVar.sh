@@ -32,7 +32,7 @@ setGlobals() {
     export ORDERER_ADMIN_TLS_SIGN_CERT=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
     export ORDERER_ADMIN_TLS_PRIVATE_KEY=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.key
 
-    export CORE_PEER_LOCALMSPID="CneMSP"
+    export CORE_PEER_LOCALMSPID="CNEMSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG1_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/cne.com/users/Admin@cne.com/msp
     export CORE_PEER_ADDRESS=localhost:7051
@@ -41,7 +41,7 @@ setGlobals() {
     export ORDERER_ADMIN_TLS_SIGN_CERT=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
     export ORDERER_ADMIN_TLS_PRIVATE_KEY=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.key
 
-    export CORE_PEER_LOCALMSPID="OeaMSP"
+    export CORE_PEER_LOCALMSPID="OEAMSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG2_CA
     export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/oea.com/users/Admin@oea.com/msp
     export CORE_PEER_ADDRESS=localhost:9051

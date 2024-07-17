@@ -47,10 +47,10 @@ Organizations:
     - &Cne
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: CneMSP
+        Name: CNEMSP
 
         # ID to load the MSP definition as
-        ID: CneMSP
+        ID: CNEMSP
 
         MSPDir: ../organizations/peerOrganizations/cne.com/msp
 
@@ -60,24 +60,24 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('CneMSP.admin', 'CneMSP.peer', 'CneMSP.client')"
+                Rule: "OR('CNEMSP.admin', 'CNEMSP.peer', 'CNEMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('CneMSP.admin', 'CneMSP.client')"
+                Rule: "OR('CNEMSP.admin', 'CNEMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('CneMSP.admin')"
+                Rule: "OR('CNEMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('CneMSP.peer')"
+                Rule: "OR('CNEMSP.peer')"
 
     - &Oea
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: OeaMSP
+        Name: OEAMSP
 
         # ID to load the MSP definition as
-        ID: OeaMSP
+        ID: OEAMSP
 
         MSPDir: ../organizations/peerOrganizations/oea.com/msp
 
@@ -87,16 +87,16 @@ Organizations:
         Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('OeaMSP.admin', 'OeaMSP.peer', 'OeaMSP.client')"
+                Rule: "OR('OEAMSP.admin', 'OEAMSP.peer', 'OEAMSP.client')"
             Writers:
                 Type: Signature
-                Rule: "OR('OeaMSP.admin', 'OeaMSP.client')"
+                Rule: "OR('OEAMSP.admin', 'OEAMSP.client')"
             Admins:
                 Type: Signature
-                Rule: "OR('OeaMSP.admin')"
+                Rule: "OR('OEAMSP.admin')"
             Endorsement:
                 Type: Signature
-                Rule: "OR('OeaMSP.peer')"
+                Rule: "OR('OEAMSP.peer')"
 
 ################################################################################
 #

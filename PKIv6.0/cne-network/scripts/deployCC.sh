@@ -141,9 +141,9 @@ checkPrereqs
 packageChaincode
 
 ## Install chaincode on peer0.org1 and peer0.org2
-infoln "Installing chaincode on peer0.org1..."
+infoln "Installing chaincode on peer0.cne..."
 installChaincode 1
-infoln "Install chaincode on peer0.org2..."
+infoln "Install chaincode on peer0.oea..."
 installChaincode 2
 
 ## query whether the chaincode is installed
@@ -154,16 +154,16 @@ approveForMyOrg 1
 
 ## check whether the chaincode definition is ready to be committed
 ## expect org1 to have approved and org2 not to
-checkCommitReadiness 1 "\"CneMSP\": true" "\"OeaMSP\": false"
-checkCommitReadiness 2 "\"CneMSP\": true" "\"OeaMSP\": false"
+checkCommitReadiness 1 "\"CNEMSP\": true" "\"OEAMSP\": false"
+checkCommitReadiness 2 "\"CNEMSP\": true" "\"OEAMSP\": false"
 
 ## now approve also for org2
 approveForMyOrg 2
 
 ## check whether the chaincode definition is ready to be committed
 ## expect them both to have approved
-checkCommitReadiness 1 "\"CneMSP\": true" "\"OeaMSP\": true"
-checkCommitReadiness 2 "\"CneMSP\": true" "\"OeaMSP\": true"
+checkCommitReadiness 1 "\"CNEMSP\": true" "\"OEAMSP\": true"
+checkCommitReadiness 2 "\"CNEMSP\": true" "\"OEAMSP\": true"
 
 ## now that we know for sure both orgs have approved, commit the definition
 commitChaincodeDefinition 1 2

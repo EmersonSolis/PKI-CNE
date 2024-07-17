@@ -69,7 +69,12 @@ joinChannel() {
 		COUNTER=$(expr $COUNTER + 1)
 	done
 	cat log.txt
-	verifyResult $res "After $MAX_RETRY attempts, peer0.org${ORG} has failed to join channel '$CHANNEL_NAME' "
+	if [ "$ORG" -eq 1 ]; then
+		verifyResult $res "After $MAX_RETRY attempts, peer0.cne has failed to join channel '$CHANNEL_NAME' "
+	elif [ "$ORG" -eq 2 ]; then
+		verifyResult $res "After $MAX_RETRY attempts, peer0.oea has failed to join channel '$CHANNEL_NAME' "
+	fi
+	#verifyResult $res "After $MAX_RETRY attempts, peer0.org${ORG} has failed to join channel '$CHANNEL_NAME' "
 }
 
 setAnchorPeer() {
@@ -92,15 +97,15 @@ createChannel
 successln "Channel '$CHANNEL_NAME' created"
 
 ## Join all the peers to the channel
-infoln "Joining org1 peer to the channel..."
+infoln "Joining CNE peer to the channel..."
 joinChannel 1
-infoln "Joining org2 peer to the channel..."
+infoln "Joining OEA peer to the channel..."
 joinChannel 2
 
 ## Set the anchor peers for each org in the channel
-infoln "Setting anchor peer for org1..."
+infoln "Setting anchor peer for CNE..."
 setAnchorPeer 1
-infoln "Setting anchor peer for org2..."
+infoln "Setting anchor peer for OEA..."
 setAnchorPeer 2
 
 successln "Channel '$CHANNEL_NAME' joined"

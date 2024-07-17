@@ -13,8 +13,15 @@ function installChaincode() {
   fi
   { set +x; } 2>/dev/null
   cat log.txt
-  verifyResult $res "Chaincode installation on peer0.org${ORG} has failed"
-  successln "Chaincode is installed on peer0.org${ORG}"
+
+  if [ "$ORG" -eq 1 ]; then
+    verifyResult $res "Chaincode installation on peer0.cne has failed"
+    successln "Chaincode is installed on peer0.cne"
+  elif [ "$ORG" -eq 2 ]; then
+    verifyResult $res "Chaincode installation on peer0.oea has failed"
+    successln "Chaincode is installed on peer0.oea"
+  fi
+
 }
 
 # queryInstalled PEER ORG
@@ -26,8 +33,13 @@ function queryInstalled() {
   res=$?
   { set +x; } 2>/dev/null
   cat log.txt
-  verifyResult $res "Query installed on peer0.org${ORG} has failed"
-  successln "Query installed successful on peer0.org${ORG} on channel"
+  if [ "$ORG" -eq 1 ]; then
+    verifyResult $res "Query installed on peer0.cne has failed"
+    successln "Query installed successful on peer0.cne on channel"
+  elif [ "$ORG" -eq 2 ]; then
+    verifyResult $res "Query installed on peer0.oea has failed"
+    successln "Query installed successful on peer0.oea on channel"
+  fi
 }
 
 # approveForMyOrg VERSION PEER ORG
@@ -39,8 +51,13 @@ function approveForMyOrg() {
   res=$?
   { set +x; } 2>/dev/null
   cat log.txt
-  verifyResult $res "Chaincode definition approved on peer0.org${ORG} on channel '$CHANNEL_NAME' failed"
-  successln "Chaincode definition approved on peer0.org${ORG} on channel '$CHANNEL_NAME'"
+  if [ "$ORG" -eq 1 ]; then
+    verifyResult $res "Chaincode definition approved on peer0.cne on channel '$CHANNEL_NAME' failed"
+    successln "Chaincode definition approved on peer0.cne on channel '$CHANNEL_NAME'"
+  elif [ "$ORG" -eq 2 ]; then
+    verifyResult $res "Chaincode definition approved on peer0.oea on channel '$CHANNEL_NAME' failed"
+    successln "Chaincode definition approved on peer0.oea on channel '$CHANNEL_NAME'"
+  fi
 }
 
 # checkCommitReadiness VERSION PEER ORG
@@ -68,9 +85,17 @@ function checkCommitReadiness() {
   done
   cat log.txt
   if test $rc -eq 0; then
-    infoln "Checking the commit readiness of the chaincode definition successful on peer0.org${ORG} on channel '$CHANNEL_NAME'"
+    if [ "$ORG" -eq 1 ]; then
+      infoln "Checking the commit readiness of the chaincode definition successful on peer0.cne on channel '$CHANNEL_NAME'"
+    elif [ "$ORG" -eq 2 ]; then
+      infoln "Checking the commit readiness of the chaincode definition successful on peer0.oea on channel '$CHANNEL_NAME'"
+    fi
   else
-    fatalln "After $MAX_RETRY attempts, Check commit readiness result on peer0.org${ORG} is INVALID!"
+    if [ "$ORG" -eq 1 ]; then
+      fatalln "After $MAX_RETRY attempts, Check commit readiness result on peer0.cne is INVALID!"
+    elif [ "$ORG" -eq 2 ]; then
+      fatalln "After $MAX_RETRY attempts, Check commit readiness result on peer0.oea is INVALID!"
+    fi
   fi
 }
 
@@ -88,8 +113,13 @@ function commitChaincodeDefinition() {
   res=$?
   { set +x; } 2>/dev/null
   cat log.txt
-  verifyResult $res "Chaincode definition commit failed on peer0.org${ORG} on channel '$CHANNEL_NAME' failed"
-  successln "Chaincode definition committed on channel '$CHANNEL_NAME'"
+  if [ "$ORG" -eq 1 ]; then
+    verifyResult $res "Chaincode definition commit failed on peer0.cne on channel '$CHANNEL_NAME' failed"
+    successln "Chaincode definition committed on channel '$CHANNEL_NAME'"
+  elif [ "$ORG" -eq 2 ]; then
+    verifyResult $res "Chaincode definition commit failed on peer0.oea on channel '$CHANNEL_NAME' failed"
+    successln "Chaincode definition committed on channel '$CHANNEL_NAME'"
+  fi
 }
 
 # queryCommitted ORG
@@ -115,9 +145,17 @@ function queryCommitted() {
   done
   cat log.txt
   if test $rc -eq 0; then
-    successln "Query chaincode definition successful on peer0.org${ORG} on channel '$CHANNEL_NAME'"
+    if [ "$ORG" -eq 1 ]; then
+      successln "Query chaincode definition successful on peer0.cne on channel '$CHANNEL_NAME'"
+    elif [ "$ORG" -eq 2 ]; then
+      successln "Query chaincode definition successful on peer0.oea on channel '$CHANNEL_NAME'"
+    fi
   else
-    fatalln "After $MAX_RETRY attempts, Query chaincode definition result on peer0.org${ORG} is INVALID!"
+    if [ "$ORG" -eq 1 ]; then
+      fatalln "After $MAX_RETRY attempts, Query chaincode definition result on peer0.cne is INVALID!"
+    elif [ "$ORG" -eq 2 ]; then
+      fatalln "After $MAX_RETRY attempts, Query chaincode definition result on peer0.oea is INVALID!"
+    fi
   fi
 }
 
@@ -160,8 +198,16 @@ function chaincodeQuery() {
   done
   cat log.txt
   if test $rc -eq 0; then
-    successln "Query successful on peer0.org${ORG} on channel '$CHANNEL_NAME'"
+    if [ "$ORG" -eq 1 ]; then
+      successln "Query successful on peer0.cne on channel '$CHANNEL_NAME'"
+    elif [ "$ORG" -eq 2 ]; then
+      successln "Query successful on peer0.oea on channel '$CHANNEL_NAME'"
+    fi 
   else
-    fatalln "After $MAX_RETRY attempts, Query result on peer0.org${ORG} is INVALID!"
+    if [ "$ORG" -eq 1 ]; then
+      fatalln "After $MAX_RETRY attempts, Query result on peer0.cne is INVALID!"
+    elif [ "$ORG" -eq 2 ]; then
+      fatalln "After $MAX_RETRY attempts, Query result on peer0.oea is INVALID!"
+    fi 
   fi
 }
